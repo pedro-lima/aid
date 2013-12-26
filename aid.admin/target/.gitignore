@@ -1,0 +1,17 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+.classpath
+.settings
+.project
+
+aid.admin
+classes
+m2e-wtp
+maven-archiver
+surefire
+test-classes

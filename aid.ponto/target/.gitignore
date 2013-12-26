@@ -1,0 +1,14 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+.classpath
+.settings
+.project
+
+classes
+m2e-wtp
+test-classes

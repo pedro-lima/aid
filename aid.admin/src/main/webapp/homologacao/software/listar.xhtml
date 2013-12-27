@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/template.xhtml">
+	<ui:define name="content">
+		<h:form id="grid">
+			<p:panel id="panel" header="Listar Software" toggleable="false">
+				<p:focus context="panel" />
+				<p:dataTable id="listagem" var="soft"
+					value="#{listarSoftwareBean.softwareCollection}" paginator="true"
+					lazy="true" rows="50"
+					emptyMessage="Não existem softwares cadastrados."
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+					<p:column headerText="Marca">
+						<h:outputText value="#{soft.marca}" />
+					</p:column>
+					<p:column headerText="Modelo">
+						<h:outputText value="#{soft.modelo}" />
+					</p:column>
+					<p:column headerText="Tipo">
+						<h:outputText value="#{soft.tipo.nome}" />
+					</p:column>
+					<p:column style="width:15%;text-align: center;" headerText="Ação">
+						<p:commandButton icon="ui-icon-trash" title="Remover"
+							rendered="#{listarSoftwareBean.isDelete(soft)}" update=":grid"></p:commandButton>
+						<p:commandButton icon="ui-icon-pencil" title="Editar"></p:commandButton>
+						<p:commandButton icon="ui-icon-zoomin" title="Detalhe"></p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

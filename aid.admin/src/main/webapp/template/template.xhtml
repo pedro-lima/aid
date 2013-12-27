@@ -25,7 +25,22 @@
 	<base href="#{request.contextPath}/"></base>
 </h:head>
 <h:body>
-	<p:growl id="messages" />
+	<ui:debug hotkey="z"></ui:debug>
+
+	<p:growl id="boxMessages" />
+
+	<p:ajaxStatus
+		style="width:64px;height:64px;position:fixed;right:50px;bottom:50px;z-index: 1;"
+		id="ajaxStatusPanel">
+		<f:facet name="start">
+			<h:graphicImage library="images" name="load.gif" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+
+
 	<ui:insert name="header">
 		<ui:include src="/template/header.xhtml"></ui:include>
 	</ui:insert>
@@ -37,5 +52,11 @@
 	<ui:insert name="footer">
 		<ui:include src="/template/footer.xhtml"></ui:include>
 	</ui:insert>
+
+	<script>
+		function hideMessages() {
+			$("#mensagens").delay(10000).hide(400);
+		}
+	</script>
 </h:body>
 </html>

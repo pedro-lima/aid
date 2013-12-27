@@ -13,9 +13,13 @@ public interface Dao<T> {
 	public List<T> listar();
 	
 	public List<T> listar(String query);
+	
+	public List<T> list(int offset, int max);
 
 	public T buscar(Long id);
 	
 	public T buscar(String query);
+	
+	public Long count();
 
 }

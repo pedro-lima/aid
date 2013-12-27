@@ -4,9 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-<body>
+<h:body>
 	<ui:composition template="/template/template.xhtml">
-		<ui:param name="pageTitle" value=""></ui:param>
 		<ui:define name="content">
 			<div class="grid_11">
 				<h2>
@@ -14,16 +13,13 @@
 				</h2>
 				<p>
 					<h:outputText value="#{msg.sobre_descricao}" />
-				</p>
-				<p:button value="Bookmark">
-					
-				</p:button>
-
+				</p>				
 			</div>
 			<div class="grid_5">
 				<h2>[TODO]</h2>
 			</div>
 		</ui:define>
 	</ui:composition>
-</body>
+</h:body>
 </html>
+

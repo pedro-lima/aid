@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="content">
+			<p>
+				<p:messages id="mensagens" showDetail="true"></p:messages>
+			</p>
+			<h:form id="form" prependId="false">
+				<p:panel id="panel" header="Cadastrar Software" toggleable="false">
+					<p:focus context="panel" />
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Marca"></h:outputText>
+						<h:panelGroup>
+							<h:inputText value="#{salvarSoftwareBean.software.marca}" />
+						</h:panelGroup>
+						<h:outputText value="Modelo" />
+						<h:panelGroup>
+							<h:inputText value="#{salvarSoftwareBean.software.modelo}" />
+						</h:panelGroup>
+						<h:outputText value="Observação" />
+						<h:panelGroup>
+							<p:editor id="editor"
+								value="#{salvarSoftwareBean.software.observacao}" width="600" />
+						</h:panelGroup>
+						<h:outputText value="Tipo"></h:outputText>
+						<h:panelGroup>
+							<p:selectOneMenu value="#{salvarSoftwareBean.software.tipo}">
+								<f:selectItems value="#{salvarSoftwareBean.tipoSoftwares}"
+									var="tipo" itemValue="#{tipo}" itemLabel="#{tipo.nome}"></f:selectItems>
+							</p:selectOneMenu>
+						</h:panelGroup>
+						<p:commandButton actionListener="#{salvarSoftwareBean.salvar()}"
+							value="Salvar" update=":mensagens" oncomplete="hideMessages()">
+						</p:commandButton>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+</body>
+</html>

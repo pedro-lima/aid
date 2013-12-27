@@ -1,12 +1,11 @@
 package aid.admin.main.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.model.LazyDataModel;
 import aid.core.main.enumerations.TipoSoftware;
 import aid.core.main.exceptions.CRUDException;
 import aid.core.main.interfaces.LocalSoftwareBusiness;
@@ -22,16 +21,17 @@ public class ListarSoftwareBean implements Serializable {
 	@Inject
 	private Message mensagem;
 	private Software software;
-	private List<Software> softwareCollection;
+	@Inject
+	private LazyDataModel<Software> softwareCollection;
 
 	@PostConstruct
 	public void init() {
-		try {
+		/*try {
 			this.softwareCollection = business.listar();
 		} catch (CRUDException e) {
 			this.softwareCollection = new ArrayList<>();
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	public Software getSoftware() {
@@ -42,11 +42,11 @@ public class ListarSoftwareBean implements Serializable {
 		this.software = software;
 	}
 
-	public List<Software> getSoftwareCollection() {
+	public LazyDataModel<Software> getSoftwareCollection() {
 		return softwareCollection;
 	}
 
-	public void setSoftwareCollection(List<Software> softwareCollection) {
+	public void setSoftwareCollection(LazyDataModel<Software> softwareCollection) {
 		this.softwareCollection = softwareCollection;
 	}
 

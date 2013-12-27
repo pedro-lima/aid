@@ -47,7 +47,7 @@ public abstract class AbstractDao<T> implements Serializable, Dao<T> {
 				this.getClazz());
 		query.from(this.getClazz());
 		return this.em.createQuery(query).getResultList();
-	}	
+	}
 
 	@SuppressWarnings("unchecked")
 	public T buscar(String query) {
@@ -58,7 +58,23 @@ public abstract class AbstractDao<T> implements Serializable, Dao<T> {
 	public List<T> listar(String query) {
 		return this.em.createNamedQuery(query).getResultList();
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> list(int offset, int max) {
+		CriteriaQuery<T> query = this.em.getCriteriaBuilder().createQuery(
+				this.getClazz());
+		query.from(this.getClazz());
+		return this.em.createQuery(query).setMaxResults(max)
+				.setFirstResult(offset).getResultList();
+	}
 	
+	@SuppressWarnings("unchecked")
+	public Long count() {		
+		CriteriaQuery<Long> query = this.em.getCriteriaBuilder().createQuery(Long.class);		
+		query.select(this.em.getCriteriaBuilder().count(query.from((this.getClazz()))));
+		return this.em.createQuery(query).getSingleResult();		
+	}
+
 	@SuppressWarnings("rawtypes")
 	protected abstract Class getClazz();
 

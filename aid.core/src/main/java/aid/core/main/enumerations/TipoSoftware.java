@@ -3,7 +3,7 @@ package aid.core.main.enumerations;
 import java.io.Serializable;
 
 public enum TipoSoftware implements Serializable{
-	SistemaOperacional("Sistema Operacional"), AntiVirus("AntivÃ­rus"), Driver(
+	SistemaOperacional("Sistema Operacional"), AntiVirus("Antivírus"), Driver(
 			"Driver"), Aplicativo("Aplicativo");
 	private String nome;
 

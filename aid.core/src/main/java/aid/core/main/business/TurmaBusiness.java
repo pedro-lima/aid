@@ -6,6 +6,7 @@ import aid.core.main.interfaces.Business;
 import aid.core.main.models.Turma;
 
 public class TurmaBusiness implements Business<Turma> {
+	private static final long serialVersionUID = -3474528951660192213L;
 
 	public void salvar(Turma obj) throws CRUDException {
 		throw new UnsupportedOperationException();

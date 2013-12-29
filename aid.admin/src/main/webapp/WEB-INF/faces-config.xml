@@ -12,4 +12,11 @@
 		</resource-bundle>
 	</application>
 
+	<navigation-rule>
+		<from-view-id>/homologacao/software/listar.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>cadastrar_software</from-outcome>
+			<to-view-id>/homologacao/software/cadastrar.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

@@ -6,6 +6,7 @@ import aid.core.main.interfaces.Business;
 import aid.core.main.models.Aluno;
 
 public class AlunoBusiness implements Business<Aluno> {
+	private static final long serialVersionUID = 6889283625039167997L;
 
 	public void salvar(Aluno obj) throws CRUDException {
 		throw new UnsupportedOperationException();

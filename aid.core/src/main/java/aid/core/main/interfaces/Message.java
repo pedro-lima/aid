@@ -1,6 +1,8 @@
 package aid.core.main.interfaces;
 
-public interface Message {
+import java.io.Serializable;
+
+public interface Message extends Serializable {
 	public void mensagemAlert(String titulo, String mensagem);
 
 	public void mensagemInfo(String titulo, String mensagem);

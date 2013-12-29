@@ -6,6 +6,7 @@ import aid.core.main.interfaces.Business;
 import aid.core.main.models.Peca;
 
 public class PecaBusiness implements Business<Peca> {
+	private static final long serialVersionUID = 8998525998074164237L;
 
 	public void salvar(Peca obj) throws CRUDException {
 		throw new UnsupportedOperationException();

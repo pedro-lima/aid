@@ -1,6 +1,5 @@
 package aid.core.main.persistences;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -8,7 +7,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import aid.core.main.annotations.Transaction;
 import aid.core.main.interfaces.Dao;
 
-public abstract class AbstractDao<T> implements Serializable, Dao<T> {
+public abstract class AbstractDao<T> implements Dao<T> {
 	private static final long serialVersionUID = 2689951424152897002L;
 	@Inject
 	private EntityManager em;

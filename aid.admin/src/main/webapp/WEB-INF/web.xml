@@ -39,4 +39,7 @@
 		<param-name>com.sun.faces.writeStateAtFormEnd</param-name>
 		<param-value>false</param-value>
 	</context-param>
+	<session-config>
+		<session-timeout>5</session-timeout>
+	</session-config>
 </web-app>

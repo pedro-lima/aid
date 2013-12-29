@@ -39,7 +39,7 @@ public class Software implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	@Column(nullable=false)
-	private TipoSoftware tipo;
+	private TipoSoftware tipo = TipoSoftware.AntiVirus;
 	@ManyToMany
 	private List<Homologacao> homologacoes = new ArrayList<Homologacao>();
 

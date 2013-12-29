@@ -1,11 +1,13 @@
 package aid.admin.main.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.model.LazyDataModel;
+import javax.servlet.http.HttpSession;
 import aid.core.main.enumerations.TipoSoftware;
 import aid.core.main.exceptions.CRUDException;
 import aid.core.main.interfaces.LocalSoftwareBusiness;
@@ -20,20 +22,46 @@ public class ListarSoftwareBean implements Serializable {
 	private LocalSoftwareBusiness business;
 	@Inject
 	private Message mensagem;
-	private Software software;
 	@Inject
-	private LazyDataModel<Software> softwareCollection;
+	private HttpSession session;
+	private List<Software> softwareCollection;
+	private Software software;
 
 	@PostConstruct
 	public void init() {
-		/*try {
+		try {
 			this.softwareCollection = business.listar();
 		} catch (CRUDException e) {
 			this.softwareCollection = new ArrayList<>();
-			e.printStackTrace();
-		}*/
+		} finally {
+			this.software = new Software();
+		}
 	}
-	
+
+	public LocalSoftwareBusiness getBusiness() {
+		return business;
+	}
+
+	public void setBusiness(LocalSoftwareBusiness business) {
+		this.business = business;
+	}
+
+	public Message getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(Message mensagem) {
+		this.mensagem = mensagem;
+	}
+
+	public List<Software> getSoftwareCollection() {
+		return softwareCollection;
+	}
+
+	public void setSoftwareCollection(List<Software> softwareCollection) {
+		this.softwareCollection = softwareCollection;
+	}
+
 	public Software getSoftware() {
 		return software;
 	}
@@ -42,42 +70,30 @@ public class ListarSoftwareBean implements Serializable {
 		this.software = software;
 	}
 
-	public LazyDataModel<Software> getSoftwareCollection() {
-		return softwareCollection;
-	}
-
-	public void setSoftwareCollection(LazyDataModel<Software> softwareCollection) {
-		this.softwareCollection = softwareCollection;
-	}
-
 	public boolean isDelete(Software software) {
 		return this.business.isDelete(software.getId());
 	}
 
-	public void delete(Software software) {
+	public void detalheSoftware(Software software) {
+		this.software = software;
+	}
+
+	public void remover(Software software) {
 		try {
 			this.business.remover(software);
+			this.softwareCollection = business.listar();
 			mensagem.mensagemInfo("Sucesso", "Software removido com sucesso.");
 		} catch (CRUDException e) {
 			mensagem.mensagemErro("Erro", "Erro ao remover o software.");
 		}
 	}
 
-	public void detalhe(Software software) {
-		this.software = software;
+	public String editarSoftware(Software software) {
+		this.session.setAttribute(SalvarSoftwareBean.sessionKey,software);
+		return "cadastrar_software";
 	}
 
 	public TipoSoftware[] getTipoSoftwares() {
-        return TipoSoftware.values();
-    }
-	
-	public void editar(Software software) {
-		try {
-			this.business.atualizar(software);
-			mensagem.mensagemInfo("Sucesso", "Software atualizado com sucesso.");
-		} catch (CRUDException e) {
-			mensagem.mensagemErro("Erro", "Erro ao atualizar o software.");
-		}
+		return TipoSoftware.values();
 	}
-
 }

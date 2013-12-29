@@ -6,6 +6,7 @@ import aid.core.main.interfaces.Business;
 import aid.core.main.models.Homologacao;
 
 public class HomologacaoBusiness implements Business<Homologacao> {
+	private static final long serialVersionUID = -4406735515592464020L;
 
 	public void salvar(Homologacao obj) throws CRUDException {
 		throw new UnsupportedOperationException();

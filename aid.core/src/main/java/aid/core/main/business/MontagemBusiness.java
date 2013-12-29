@@ -6,6 +6,7 @@ import aid.core.main.interfaces.Business;
 import aid.core.main.models.Montagem;
 
 public class MontagemBusiness implements Business<Montagem> {
+	private static final long serialVersionUID = -7155454345123708665L;
 
 	public void salvar(Montagem obj) throws CRUDException {
 		throw new UnsupportedOperationException();

@@ -6,6 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import aid.core.main.enumerations.TipoSoftware;
 import aid.core.main.exceptions.CRUDException;
 import aid.core.main.interfaces.LocalSoftwareBusiness;
@@ -17,25 +18,33 @@ import aid.core.main.models.Software;
 public class SalvarSoftwareBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Inject
-	private LocalSoftwareBusiness business;	
+	private LocalSoftwareBusiness business;
 	@Inject
 	private Message mensagem;
-	@Inject 
+	@Inject
 	private Instance<Software> softwareInject;
 	private Software software;
+	@Inject
+	private HttpSession session;
+	public static final String sessionKey = "editar_software";
 
 	public SalvarSoftwareBean() {
 		super();
-	}	
-	
+	}
+
 	@PostConstruct
 	public void init() {
-		this.newSoftware();
+		Software soft = (Software) this.session.getAttribute(sessionKey);
+		if (soft == null) {
+			this.newSoftware();
+		} else {
+			this.software = soft;
+		}
 	}
-	
-	private void newSoftware(){
+
+	private void newSoftware() {
 		this.software = this.softwareInject.get();
-	}	
+	}
 
 	public LocalSoftwareBusiness getBusiness() {
 		return business;
@@ -61,17 +70,47 @@ public class SalvarSoftwareBean implements Serializable {
 		this.mensagem = mensagem;
 	}
 
-	public void salvar() {
+	public Instance<Software> getSoftwareInject() {
+		return softwareInject;
+	}
+
+	public void setSoftwareInject(Instance<Software> softwareInject) {
+		this.softwareInject = softwareInject;
+	}
+
+	public void cadastrar() {
 		try {
 			this.business.salvar(software);
-			this.newSoftware();
 			mensagem.mensagemInfo("Sucesso", "Software cadastrado com sucesso.");
 		} catch (CRUDException e) {
 			mensagem.mensagemErro("Erro", "Erro ao cadastrar o software.");
 		}
 	}
+
+	public void editar() {
+		try {
+			this.business.atualizar(software);
+			mensagem.mensagemInfo("Sucesso", "Software atualizado com sucesso.");
+		} catch (CRUDException e) {
+			mensagem.mensagemErro("Erro", "Erro ao atualizar o software.");
+		}
+	}
+
+	public void salvar() {
+		if (this.software.getId() == null) {
+			this.cadastrar();
+		} else {
+			this.editar();			
+		}		
+		this.limpar();
+	}
 	
+	public void limpar() {
+		this.session.removeAttribute(sessionKey);
+		this.newSoftware();
+	}
+
 	public TipoSoftware[] getTipoSoftwares() {
-        return TipoSoftware.values();
-    }
+		return TipoSoftware.values();
+	}
 }

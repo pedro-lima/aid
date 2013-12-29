@@ -1,9 +1,11 @@
 package aid.core.main.interfaces;
 
+import java.io.Serializable;
 import java.util.List;
+
 import aid.core.main.exceptions.CRUDException;
 
-public interface Business<T> {
+public interface Business<T> extends Serializable{
 
 	public abstract void salvar(T obj) throws CRUDException;
 

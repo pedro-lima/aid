@@ -7,6 +7,7 @@ import aid.core.main.interfaces.Business;
 import aid.core.main.models.Beneficiado;
 
 public class BeneficiadoBusiness implements Business<Beneficiado> {
+	private static final long serialVersionUID = -6855915019804261955L;
 
 	public void salvar(Beneficiado obj) throws CRUDException {
 		throw new UnsupportedOperationException();

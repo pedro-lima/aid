@@ -26,9 +26,9 @@ public class ProdutorFaces implements Serializable {
 	private HttpServletRequest request = (HttpServletRequest) FacesContext
 			.getCurrentInstance().getExternalContext().getRequest();
 
-	@Produces
+	/*@Produces
 	private HttpSession session = ((HttpServletRequest) FacesContext
 			.getCurrentInstance().getExternalContext().getRequest())
-			.getSession();
+			.getSession();*/
 
 }

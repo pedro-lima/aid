@@ -6,6 +6,7 @@ import aid.core.main.interfaces.Business;
 import aid.core.main.models.Doacao;
 
 public class DoacaoBusiness implements Business<Doacao> {
+	private static final long serialVersionUID = 807834398370705713L;
 
 	public void salvar(Doacao obj) throws CRUDException {
 		throw new UnsupportedOperationException();

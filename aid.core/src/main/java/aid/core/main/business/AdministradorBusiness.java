@@ -6,6 +6,7 @@ import aid.core.main.interfaces.Business;
 import aid.core.main.models.Administrador;
 
 public class AdministradorBusiness implements Business<Administrador> {
+	private static final long serialVersionUID = -6046015758550676516L;
 
 	public void salvar(Administrador obj) throws CRUDException {
 		throw new UnsupportedOperationException();
@@ -25,6 +26,6 @@ public class AdministradorBusiness implements Business<Administrador> {
 
 	public Administrador buscar(Long id) throws CRUDException {
 		throw new UnsupportedOperationException();
-	}	
-	
+	}
+
 }

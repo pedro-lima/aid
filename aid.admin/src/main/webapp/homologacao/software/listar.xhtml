@@ -9,32 +9,70 @@
 
 <ui:composition template="/template/template.xhtml">
 	<ui:define name="content">
-		<h:form id="grid">
-			<p:panel id="panel" header="Listar Software" toggleable="false">
-				<p:focus context="panel" />
-				<p:dataTable id="listagem" var="soft"
-					value="#{listarSoftwareBean.softwareCollection}" paginator="true"
-					lazy="true" rows="50"
-					emptyMessage="Não existem softwares cadastrados."
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-					<p:column headerText="Marca">
-						<h:outputText value="#{soft.marca}" />
-					</p:column>
-					<p:column headerText="Modelo">
-						<h:outputText value="#{soft.modelo}" />
-					</p:column>
-					<p:column headerText="Tipo">
-						<h:outputText value="#{soft.tipo.nome}" />
-					</p:column>
-					<p:column style="width:15%;text-align: center;" headerText="Ação">
-						<p:commandButton icon="ui-icon-trash" title="Remover"
-							rendered="#{listarSoftwareBean.isDelete(soft)}" update=":grid"></p:commandButton>
-						<p:commandButton icon="ui-icon-pencil" title="Editar"></p:commandButton>
-						<p:commandButton icon="ui-icon-zoomin" title="Detalhe"></p:commandButton>
-					</p:column>
-				</p:dataTable>
-			</p:panel>
+		<p:growl id="grow" showDetail="true" globalOnly="true" />
+		<p:panel id="panel" header="Listar Software" toggleable="false">
+			<p:focus context="panel" />
+			<p:dataTable id="listagem" var="soft"
+				value="#{listarSoftwareBean.softwareCollection}" paginator="true"
+				rows="10" currentPageReportTemplate="{currentPage} de {totalPages}"
+				emptyMessage="Não existem softwares cadastrados."
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+				<p:column headerText="Marca">
+					<h:outputText value="#{soft.marca}" />
+				</p:column>
+				<p:column headerText="Modelo">
+					<h:outputText value="#{soft.modelo}" />
+				</p:column>
+				<p:column headerText="Tipo">
+					<h:outputText value="#{soft.tipo.nome}" />
+				</p:column>
+				<p:column style="width:15%;text-align: center;" headerText="Ação">
+					<h:form prependId="false">
+						<p:commandButton process="@this"
+							actionListener="#{listarSoftwareBean.remover(soft)}"
+							update=":grow,:listagem" icon="ui-icon-trash">
+							<p:confirm header="Confirmation" message="Are you sure?"
+								icon="ui-icon-alert" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-document"
+							onclick="PF('dlg').show()" update=":gridDetail"
+							actionListener="#{listarSoftwareBean.detalheSoftware(soft)}" />
+						<p:commandButton icon="ui-icon-pencil" ajax="false" action="#{listarSoftwareBean.editarSoftware(soft)}" />
+					</h:form>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+		<p:blockUI block="listagem" trigger="listagem">
+			<span>#{msg.carregando}</span>
+			<br />
+			<h:graphicImage library="images" name="load2.gif" />
+		</p:blockUI>
+		<h:form>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode"
+				closable="false">
+				<p:commandButton value="Yes" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
 		</h:form>
+		<p:dialog header="Enter FirstName" widgetVar="dlg" resizable="true"
+			showEffect="fade" hideEffect="explode" modal="true">
+			<h:panelGrid columns="2" cellpadding="5" id="gridDetail">
+				<h:outputText value="Marca"></h:outputText>
+				<h:outputText value="#{listarSoftwareBean.software.marca}"></h:outputText>
+
+
+				<h:outputText value="Modelo" />
+				<h:outputText value="#{listarSoftwareBean.software.modelo}" />
+
+				<h:outputText value="Observação" />
+				<h:outputText value="#{listarSoftwareBean.software.observacao}" />
+
+				<h:outputText value="Tipo"></h:outputText>
+				<h:outputText value="#{listarSoftwareBean.software.tipo.nome}"></h:outputText>
+			</h:panelGrid>
+		</p:dialog>
 	</ui:define>
 </ui:composition>
 </html>

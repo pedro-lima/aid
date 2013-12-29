@@ -10,6 +10,7 @@ import aid.core.main.interfaces.LocalSoftwareDao;
 import aid.core.main.models.Software;
 
 public class SoftwareBusiness implements LocalSoftwareBusiness {
+	private static final long serialVersionUID = 1674493130437643508L;
 	@Inject
 	private LocalSoftwareDao dao;
 	@Inject
@@ -54,10 +55,10 @@ public class SoftwareBusiness implements LocalSoftwareBusiness {
 	public Software buscar(Long id) throws CRUDException {
 		try {
 			return this.dao.buscar(id);
-		} catch (NoResultException  ex) {
+		} catch (NoResultException ex) {
 			log.error(ex);
 			throw new CRUDException(ex);
-		}		
+		}
 	}
 
 	public boolean isDelete(Long id) {

@@ -20,11 +20,11 @@ public class HomologacaoBusiness implements Business<Homologacao> {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Homologacao> listar() throws CRUDException {
+	public List<Homologacao> listar() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Homologacao buscar(Long id) throws CRUDException {
+	public Homologacao buscar(Long id) {
 		throw new UnsupportedOperationException();
 	}
 

@@ -20,11 +20,11 @@ public class AlunoBusiness implements Business<Aluno> {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Aluno> listar() throws CRUDException {
+	public List<Aluno> listar() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Aluno buscar(Long id) throws CRUDException {
+	public Aluno buscar(Long id) {
 		throw new UnsupportedOperationException();
 	}
 

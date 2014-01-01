@@ -13,7 +13,7 @@ public interface Business<T> extends Serializable{
 
 	public abstract void atualizar(T obj) throws CRUDException;
 
-	public abstract List<T> listar() throws CRUDException;
+	public abstract List<T> listar();
 
-	public abstract T buscar(Long id) throws CRUDException;
+	public abstract T buscar(Long id);
 }

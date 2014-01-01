@@ -20,11 +20,11 @@ public class DescarteBusiness implements Business<Descarte> {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Descarte> listar() throws CRUDException {
+	public List<Descarte> listar() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Descarte buscar(Long id) throws CRUDException {
+	public Descarte buscar(Long id) {
 		throw new UnsupportedOperationException();
 	}
 

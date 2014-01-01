@@ -1,7 +1,6 @@
 package aid.admin.main.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -25,17 +24,12 @@ public class ListarSoftwareBean implements Serializable {
 	@Inject
 	private HttpSession session;
 	private List<Software> softwareCollection;
+	@Inject
 	private Software software;
 
 	@PostConstruct
 	public void init() {
-		try {
-			this.softwareCollection = business.listar();
-		} catch (CRUDException e) {
-			this.softwareCollection = new ArrayList<>();
-		} finally {
-			this.software = new Software();
-		}
+		this.buscar();
 	}
 
 	public LocalSoftwareBusiness getBusiness() {
@@ -78,10 +72,14 @@ public class ListarSoftwareBean implements Serializable {
 		this.software = software;
 	}
 
+	public void buscar() {
+		this.softwareCollection = this.business.listar();		
+	}
+
 	public void remover(Software software) {
-		try {
+		try {			
 			this.business.remover(software);
-			this.softwareCollection = business.listar();
+			this.softwareCollection.remove(software);
 			mensagem.mensagemInfo("Sucesso", "Software removido com sucesso.");
 		} catch (CRUDException e) {
 			mensagem.mensagemErro("Erro", "Erro ao remover o software.");
@@ -89,7 +87,7 @@ public class ListarSoftwareBean implements Serializable {
 	}
 
 	public String editarSoftware(Software software) {
-		this.session.setAttribute(SalvarSoftwareBean.sessionKey,software);
+		this.session.setAttribute(SalvarSoftwareBean.sessionKey, software);
 		return "cadastrar_software";
 	}
 

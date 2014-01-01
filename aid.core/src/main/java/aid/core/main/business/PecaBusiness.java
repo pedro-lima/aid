@@ -20,11 +20,11 @@ public class PecaBusiness implements Business<Peca> {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Peca> listar() throws CRUDException {
+	public List<Peca> listar() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Peca buscar(Long id) throws CRUDException {
+	public Peca buscar(Long id) {
 		throw new UnsupportedOperationException();
 	}
 

@@ -20,11 +20,11 @@ public class TurmaBusiness implements Business<Turma> {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Turma> listar() throws CRUDException {
+	public List<Turma> listar() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Turma buscar(Long id) throws CRUDException {
+	public Turma buscar(Long id) {
 		throw new UnsupportedOperationException();
 	}
 

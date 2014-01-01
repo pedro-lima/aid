@@ -20,11 +20,11 @@ public class AdministradorBusiness implements Business<Administrador> {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Administrador> listar() throws CRUDException {
+	public List<Administrador> listar() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Administrador buscar(Long id) throws CRUDException {
+	public Administrador buscar(Long id) {
 		throw new UnsupportedOperationException();
 	}
 

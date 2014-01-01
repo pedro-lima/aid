@@ -26,8 +26,8 @@ public class SoftwareBusiness implements LocalSoftwareBusiness {
 	}
 
 	public void remover(Software obj) throws CRUDException {
-		try {
-			this.dao.remover(obj);
+		try {			
+			this.dao.remover(this.dao.buscar(obj.getId()));			
 		} catch (Exception ex) {
 			log.error(ex);
 			throw new CRUDException(ex);
@@ -43,26 +43,21 @@ public class SoftwareBusiness implements LocalSoftwareBusiness {
 		}
 	}
 
-	public List<Software> listar() throws CRUDException {
-		try {
-			return dao.listar();
-		} catch (Exception ex) {
-			log.error(ex);
-			throw new CRUDException(ex);
-		}
+	public List<Software> listar() {
+		return dao.listar("software.listAll.new");
 	}
 
-	public Software buscar(Long id) throws CRUDException {
+	public Software buscar(Long id) {
 		try {
 			return this.dao.buscar(id);
 		} catch (NoResultException ex) {
 			log.error(ex);
-			throw new CRUDException(ex);
+			return null;
 		}
 	}
 
 	public boolean isDelete(Long id) {
 		return this.dao.countHomologacoes(id) == 0;
-	}
+	}	
 
 }

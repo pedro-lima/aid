@@ -21,11 +21,11 @@ public class BeneficiadoBusiness implements Business<Beneficiado> {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Beneficiado> listar() throws CRUDException {
+	public List<Beneficiado> listar() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Beneficiado buscar(Long id) throws CRUDException {
+	public Beneficiado buscar(Long id) {
 		throw new UnsupportedOperationException();
 	}
 

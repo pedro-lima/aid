@@ -14,30 +14,32 @@
 			<p:focus context="panel" />
 			<p:dataTable id="listagem" var="soft"
 				value="#{listarSoftwareBean.softwareCollection}" paginator="true"
-				rows="10" currentPageReportTemplate="{currentPage} de {totalPages}"
+				rows="50" currentPageReportTemplate="{currentPage} de {totalPages}"
 				emptyMessage="Não existem softwares cadastrados."
-				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-				<p:column headerText="Marca">
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">				
+				<p:column sortBy="marca" headerText="Marca">
 					<h:outputText value="#{soft.marca}" />
 				</p:column>
-				<p:column headerText="Modelo">
+				<p:column sortBy="modelo" headerText="Modelo">
 					<h:outputText value="#{soft.modelo}" />
 				</p:column>
-				<p:column headerText="Tipo">
+				<p:column sortBy="tipo" headerText="Tipo">
 					<h:outputText value="#{soft.tipo.nome}" />
 				</p:column>
 				<p:column style="width:15%;text-align: center;" headerText="Ação">
 					<h:form prependId="false">
-						<p:commandButton process="@this"
-							actionListener="#{listarSoftwareBean.remover(soft)}"
+						<p:commandButton
+							actionListener="#{listarSoftwareBean.remover(soft)}" rendered="#{soft.semHomologacoes()}"
 							update=":grow,:listagem" icon="ui-icon-trash">
-							<p:confirm header="Confirmation" message="Are you sure?"
+							<p:confirm header="#{msg.confirmacao_cabecalho}" message="#{msg.confirmacao_mensagem}"
 								icon="ui-icon-alert" />
 						</p:commandButton>
 						<p:commandButton icon="ui-icon-document"
 							onclick="PF('dlg').show()" update=":gridDetail"
-							actionListener="#{listarSoftwareBean.detalheSoftware(soft)}" />
-						<p:commandButton icon="ui-icon-pencil" ajax="false" action="#{listarSoftwareBean.editarSoftware(soft)}" />
+							actionListener="#{listarSoftwareBean.detalheSoftware(soft)}">
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-pencil" ajax="false"
+							action="#{listarSoftwareBean.editarSoftware(soft)}" />
 					</h:form>
 				</p:column>
 			</p:dataTable>
@@ -50,9 +52,11 @@
 		<h:form>
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode"
 				closable="false">
-				<p:commandButton value="Yes" type="button"
-					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-				<p:commandButton value="No" type="button"
+				<p:commandButton value="#{msg.sim}" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check">
+					<p:ajax event="click" listener="#{listarSoftwareBean.buscar}" />
+				</p:commandButton>
+				<p:commandButton value="#{msg.nao}" type="button"
 					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 			</p:confirmDialog>
 		</h:form>

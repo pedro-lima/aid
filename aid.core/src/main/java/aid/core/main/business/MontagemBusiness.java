@@ -20,11 +20,11 @@ public class MontagemBusiness implements Business<Montagem> {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Montagem> listar() throws CRUDException {
+	public List<Montagem> listar() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Montagem buscar(Long id) throws CRUDException {
+	public Montagem buscar(Long id) {
 		throw new UnsupportedOperationException();
 	}
 

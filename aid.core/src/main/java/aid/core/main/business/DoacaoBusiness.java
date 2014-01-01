@@ -20,11 +20,11 @@ public class DoacaoBusiness implements Business<Doacao> {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Doacao> listar() throws CRUDException {
+	public List<Doacao> listar() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Doacao buscar(Long id) throws CRUDException {
+	public Doacao buscar(Long id) {
 		throw new UnsupportedOperationException();
 	}
 

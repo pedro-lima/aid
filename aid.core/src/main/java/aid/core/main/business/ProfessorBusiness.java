@@ -20,11 +20,11 @@ public class ProfessorBusiness implements Business<Professor> {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Professor> listar() throws CRUDException {
+	public List<Professor> listar() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Professor buscar(Long id) throws CRUDException {
+	public Professor buscar(Long id) {
 		throw new UnsupportedOperationException();
 	}
 

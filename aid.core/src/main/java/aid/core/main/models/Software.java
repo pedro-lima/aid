@@ -13,47 +13,55 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.Type;
 import aid.core.main.enumerations.TipoSoftware;
 
 @Entity
-@NamedQueries({ 
-	@NamedQuery(name = "software.count.homologacoes", query = "SELECT SIZE(o.homologacoes) FROM Software o WHERE o.id=:id") 
-})
+@NamedQueries({
+
+@NamedQuery(name = "software.listAll.new", query = "SELECT NEW aid.core.main.models.Software(s.id, s.marca, s.modelo, s.observacao, s.tipo, COUNT(h.id)) "
+		+ "FROM Software s LEFT JOIN s.homologacoes h "
+		+ "GROUP BY s.id, s.marca, s.modelo, s.observacao, s.tipo"),
+		@NamedQuery(name="software.delete",query="DELETE FROM Software o WHERE o.id LIKE :id")})
 public class Software implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Size(min=2,max=150,message="A marca do software deve conter entre {min} e {max} caracteres.")
-	@Column(length=150,nullable=false)
+	@Size(min = 2, max = 150, message = "A marca do software deve conter entre {min} e {max} caracteres.")
+	@Column(length = 150, nullable = false)
 	private String marca;
-	@Size(min=2,max=150,message="A modelo do software deve conter entre {min} e {max} caracteres.")
-	@Column(length=150,nullable=false)
-	private String modelo;	
+	@Size(min = 2, max = 150, message = "A modelo do software deve conter entre {min} e {max} caracteres.")
+	@Column(length = 150, nullable = false)
+	private String modelo;
 	@Lob
-	@Type(type = "org.hibernate.type.TextType")	
+	@Type(type = "org.hibernate.type.TextType")
 	private String observacao;
 	@Enumerated(EnumType.STRING)
 	@NotNull
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private TipoSoftware tipo = TipoSoftware.AntiVirus;
 	@ManyToMany
 	private List<Homologacao> homologacoes = new ArrayList<Homologacao>();
+	@Transient
+	private Long totalHomologacoes;
 
 	public Software() {
 		super();
 	}
 
-	public Software(String marca, String modelo, String observacao,
-			TipoSoftware tipo) {
+	public Software(Long id, String marca, String modelo, String observacao,
+			TipoSoftware tipo, Long totalHomologacoes) {
 		super();
+		this.id = id;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.observacao = observacao;
 		this.tipo = tipo;
+		this.totalHomologacoes = totalHomologacoes;
 	}
 
 	public Long getId() {
@@ -102,6 +110,25 @@ public class Software implements Serializable {
 
 	public void setHomologacoes(List<Homologacao> homologacoes) {
 		this.homologacoes = homologacoes;
+	}
+
+	public Long getTotalHomologacoes() {
+		return totalHomologacoes;
+	}
+
+	public void setTotalHomologacoes(Long totalHomologacoes) {
+		this.totalHomologacoes = totalHomologacoes;
+	}
+	
+	public boolean semHomologacoes() {
+		return this.totalHomologacoes.intValue() == 0;
+	}
+
+	@Override
+	public String toString() {
+		return "Software [id=" + id + ", marca=" + marca + ", modelo=" + modelo
+				+ ", observacao=" + observacao + ", tipo=" + tipo
+				+ ", totalHomologacoes=" + totalHomologacoes + "]";
 	}
 
 }

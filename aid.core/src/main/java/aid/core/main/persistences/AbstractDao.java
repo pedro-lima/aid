@@ -42,7 +42,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 		return (T) this.em.find(getClazz(), id);
 	}
 
-	@SuppressWarnings("unchecked")	
+	@SuppressWarnings("unchecked")
 	public List<T> listar() {
 		CriteriaQuery<T> query = this.em.getCriteriaBuilder().createQuery(
 				this.getClazz());
@@ -56,7 +56,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 				.getSingleResult();
 	}
 
-	@SuppressWarnings("unchecked")	
+	@SuppressWarnings("unchecked")
 	public List<T> listar(String query, QueryParam... params) {
 		return this.addQueryParans(this.em.createNamedQuery(query))
 				.getResultList();
@@ -68,7 +68,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 		return this.addQueryParans(this.em.createNamedQuery(query))
 				.setFirstResult(offset).setMaxResults(max).getResultList();
 	}
-	
+
 	public int executar(String query, QueryParam... params) {
 		return this.addQueryParans(this.em.createNamedQuery(query))
 				.executeUpdate();

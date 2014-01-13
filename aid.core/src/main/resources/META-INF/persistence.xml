@@ -16,11 +16,11 @@
 		<class>aid.core.main.models.ItemHomologacao</class>
 		<class>aid.core.main.models.Montagem</class>
 		<class>aid.core.main.models.Peca</class>
+		<class>aid.core.main.models.PessoaAcademica</class>
 		<class>aid.core.main.models.PessoaFisica</class>
 		<class>aid.core.main.models.Ponto</class>
 		<class>aid.core.main.models.Professor</class>
 		<class>aid.core.main.models.Software</class>
-		<class>aid.core.main.models.Turma</class>
 		<class>aid.core.main.models.Usuario</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

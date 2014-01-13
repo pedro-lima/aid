@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="content">
+			<p:growl id="grow" showDetail="true" globalOnly="true"></p:growl>
+			<h:form id="form" prependId="false">
+				<p:panel id="panel" header="Cadastrar Software" toggleable="false">
+					<p:focus context="panel" />
+					<p:fieldset legend="Dados pessoais" toggleable="true"
+						toggleSpeed="500">
+						<h:panelGrid columns="2">
+							<h:outputText value="Nome"></h:outputText>
+							<h:panelGroup>
+								<p:inputText id="nome"
+									value="#{salvarBeneficiadoBean.beneficiado.nome}"></p:inputText>
+								<p:message for="nome"></p:message>
+							</h:panelGroup>							
+						</h:panelGrid>
+					</p:fieldset>
+					<p:fieldset legend="Endereço" toggleable="true" toggleSpeed="500">
+						<h:panelGrid columns="2">
+							<h:outputText value="Rua"></h:outputText>
+							<h:panelGroup>
+								<p:inputText id="rua"
+									value="#{salvarBeneficiadoBean.beneficiado.endereco.rua}"></p:inputText>
+								<p:message for="rua"></p:message>
+							</h:panelGroup>
+
+							<h:outputText value="Bairro"></h:outputText>
+							<h:panelGroup>
+								<p:inputText id="bairro"
+									value="#{salvarBeneficiadoBean.beneficiado.endereco.bairro}"></p:inputText>
+								<p:message for="bairro"></p:message>
+							</h:panelGroup>
+
+							<h:outputText value="Numero"></h:outputText>
+							<h:panelGroup>
+								<p:inputText id="numero"
+									value="#{salvarBeneficiadoBean.beneficiado.endereco.numero}"></p:inputText>
+								<p:message for="numero"></p:message>
+							</h:panelGroup>
+
+							<h:outputText value="CEP"></h:outputText>
+							<h:panelGroup>
+								<p:inputText id="cep"
+									value="#{salvarBeneficiadoBean.beneficiado.endereco.cep}"></p:inputText>
+								<p:message for="cep"></p:message>
+							</h:panelGroup>
+
+							<h:outputText value="Cidade"></h:outputText>
+							<h:panelGroup>
+								<p:inputText id="cidade"
+									value="#{salvarBeneficiadoBean.beneficiado.endereco.cidade}"></p:inputText>
+								<p:message for="cidade"></p:message>
+							</h:panelGroup>
+
+
+							<h:outputText value="Estado"></h:outputText>
+							<p:selectOneMenu
+								value="#{salvarBeneficiadoBean.beneficiado.endereco.estado}">
+								<f:selectItems value="#{salvarBeneficiadoBean.estados}" var="estado"
+									itemLabel="#{estado.nome}" itemValue="#{estado}"></f:selectItems>
+							</p:selectOneMenu>
+						</h:panelGrid>
+					</p:fieldset>
+					<p:fieldset legend="Contato" toggleable="true" toggleSpeed="500">
+						<h:panelGrid columns="2">
+							<h:outputText value="Email"></h:outputText>
+							<h:panelGroup>
+								<p:inputText id="email"
+									value="#{salvarBeneficiadoBean.beneficiado.contato.email}"></p:inputText>
+								<p:message for="email"></p:message>
+							</h:panelGroup>
+
+							<h:outputText value="Telefone"></h:outputText>
+							<h:panelGroup>
+								<p:inputText id="telefone"
+									value="#{salvarBeneficiadoBean.beneficiado.contato.telefone}"></p:inputText>
+								<p:message for="telefone"></p:message>
+							</h:panelGroup>
+						</h:panelGrid>
+					</p:fieldset>
+					<p:commandButton actionListener="#{salvarBeneficiadoBean.salvar}"
+						value="Salvar" update=":grow,:form">
+					</p:commandButton>
+					<p:commandButton value="Limpar">
+						<p:ajax event="click" update=":form"
+							listener="#{salvarBeneficiadoBean.limpar}" />
+					</p:commandButton>
+				</p:panel>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+</body>
+</html>

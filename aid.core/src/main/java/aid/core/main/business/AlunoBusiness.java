@@ -1,31 +1,24 @@
 package aid.core.main.business;
 
 import java.util.List;
-import aid.core.main.exceptions.CRUDException;
-import aid.core.main.interfaces.Business;
+import aid.core.main.interfaces.LocalAlunoBusiness;
 import aid.core.main.models.Aluno;
 
-public class AlunoBusiness implements Business<Aluno> {
+public class AlunoBusiness extends AbstracBusiness<Aluno> implements LocalAlunoBusiness {
 	private static final long serialVersionUID = 6889283625039167997L;
 
-	public void salvar(Aluno obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
-	public void remover(Aluno obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
-	public void atualizar(Aluno obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
+	@Override
 	public List<Aluno> listar() {
-		throw new UnsupportedOperationException();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public Aluno buscar(Long id) {
-		throw new UnsupportedOperationException();
+	@Override
+	public Long getObjectKey(Aluno object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+
 
 }

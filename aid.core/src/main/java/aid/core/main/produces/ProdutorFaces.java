@@ -6,7 +6,6 @@ import javax.faces.application.Application;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class ProdutorFaces implements Serializable {
 	private static final long serialVersionUID = -7878030142026962451L;

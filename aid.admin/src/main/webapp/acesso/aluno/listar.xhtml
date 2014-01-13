@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/template.xhtml">
+	<ui:define name="content">
+		<p:growl id="grow" showDetail="true" globalOnly="true" />
+		<p:panel id="panel" header="Listar Software" toggleable="false">
+			<p:focus context="panel" />
+			<h:form id="form" prependId="false">
+				<p:dataTable id="dataTable" var="ben"
+					value="#{listarBeneficiadoBean.beneficiadoCollection}" paginator="true"
+					rows="50" emptyMessage="Não existem softwares cadastrados."
+					currentPageReportTemplate="{currentPage} de {totalPages}"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+					<p:column sortBy="nome" headerText="Nome">
+						<h:outputText value="#{ben.nome}" />
+					</p:column>
+					<p:column sortBy="cpf" headerText="CPF">
+						<h:outputText value="#{ben.cpf}" />
+					</p:column>
+					<p:column sortBy="rg" headerText="RG">
+						<h:outputText value="#{ben.rg}" />
+					</p:column>
+					<ui:remove></ui:remove>
+					<p:column style="width:15%;text-align: center;" headerText="Ação">
+						<p:commandButton
+							actionListener="#{listarBeneficiadoBean.remover(ben)}"
+							update=":grow,:form:dataTable" icon="ui-icon-trash">
+							<p:confirm header="#{msg.confirmacao_cabecalho}"
+								message="#{msg.confirmacao_mensagem}" icon="ui-icon-alert" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-document"
+							onclick="PF('dlg').show()"
+							update=":gridPessoa,:gridEndereco,:gridContato"
+							actionListener="#{listarBeneficiadoBean.detalheBeneficiado(ben)}">
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-pencil" ajax="false"
+							action="#{listarBeneficiadoBean.editarBeneficiado(ben)}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:panel>
+		<p:blockUI block="form:dataTable" trigger="form:dataTable">
+			<span>#{msg.carregando}</span>
+			<br />
+			<h:graphicImage library="images" name="load2.gif" />
+		</p:blockUI>
+		<h:form>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode"
+				closable="false">
+				<p:commandButton value="#{msg.sim}" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check">
+				</p:commandButton>
+				<p:commandButton value="#{msg.nao}" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</h:form>
+
+
+		<p:dialog id="dlgDetail" header="Enter FirstName" widgetVar="dlg"
+			resizable="true" showEffect="fade" hideEffect="explode" modal="true">
+			<p:fieldset legend="Dados pessoais" toggleable="true"
+				toggleSpeed="500">
+				<h:panelGrid id="gridPessoa" columns="2">
+					<h:outputText value="Nome"></h:outputText>
+					<h:outputText id="nome"
+						value="#{listarBeneficiadoBean.beneficiado.nome}"></h:outputText>
+
+					<h:outputText value="CPF"></h:outputText>
+					<h:outputText id="cpf" value="#{listarBeneficiadoBean.beneficiado.cpf}"></h:outputText>
+
+					<h:outputText value="CPF"></h:outputText>
+					<h:outputText id="rg" value="#{listarBeneficiadoBean.beneficiado.rg}"></h:outputText>
+
+				</h:panelGrid>
+			</p:fieldset>
+			<p:fieldset legend="Endereço" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="gridEndereco" columns="2">
+					<h:outputText value="Rua"></h:outputText>
+					<h:outputText id="rua"
+						value="#{listarBeneficiadoBean.beneficiado.endereco.rua}"></h:outputText>
+
+					<h:outputText value="Bairro"></h:outputText>
+					<h:outputText id="bairro"
+						value="#{listarBeneficiadoBean.beneficiado.endereco.bairro}"></h:outputText>
+
+
+					<h:outputText value="Numero"></h:outputText>
+					<h:outputText id="numero"
+						value="#{listarBeneficiadoBean.beneficiado.endereco.numero}"></h:outputText>
+
+
+					<h:outputText value="CEP"></h:outputText>
+					<h:outputText id="cep"
+						value="#{listarBeneficiadoBean.beneficiado.endereco.cep}"></h:outputText>
+
+
+					<h:outputText value="Cidade"></h:outputText>
+					<h:outputText id="cidade"
+						value="#{listarBeneficiadoBean.beneficiado.endereco.cidade}"></h:outputText>
+
+					<h:outputText value="Estado"></h:outputText>
+					<h:outputText
+						value="#{listarBeneficiadoBean.beneficiado.endereco.estado}">
+					</h:outputText>
+				</h:panelGrid>
+			</p:fieldset>
+			<p:fieldset legend="Contato" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="gridContato" columns="2">
+					<h:outputText value="Email"></h:outputText>
+					<h:outputText id="email"
+						value="#{listarBeneficiadoBean.beneficiado.contato.email}"></h:outputText>
+
+
+					<h:outputText value="Telefone"></h:outputText>
+
+					<h:outputText id="telefone"
+						value="#{listarBeneficiadoBean.beneficiado.contato.telefone}"></h:outputText>
+
+				</h:panelGrid>
+			</p:fieldset>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>
+</html>

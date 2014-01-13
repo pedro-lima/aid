@@ -2,36 +2,25 @@ package aid.core.main.models;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
-public abstract class PessoaFisica implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class PessoaFisica implements Serializable {
+	private static final long serialVersionUID = 1806080436517838868L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank
-	@Size(min = 10, max = 255)
-	@Column(nullable = false)
 	private String nome;
-	@CPF
-	private String cpf;	
+	private String cpf;
 	private String rg;
 	@Embedded
-	private Contato contato;
+	private Contato contato = new Contato();
 	@Embedded
-	private Endereco endereco;
-	@OneToOne
-	private Usuario usuario;
+	private Endereco endereco = new Endereco();
 
 	public PessoaFisica() {
 		super();

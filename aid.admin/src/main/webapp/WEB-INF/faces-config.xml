@@ -19,4 +19,12 @@
 			<to-view-id>/homologacao/software/cadastrar.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/doacao/beneficiado/listar.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>cadastrar_beneficiado</from-outcome>
+			<to-view-id>/doacao/beneficiado/cadastrar.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

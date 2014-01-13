@@ -1,31 +1,25 @@
 package aid.core.main.business;
 
 import java.util.List;
-import aid.core.main.exceptions.CRUDException;
-import aid.core.main.interfaces.Business;
+
+import aid.core.main.interfaces.LocalProfessorBusiness;
 import aid.core.main.models.Professor;
 
-public class ProfessorBusiness implements Business<Professor> {
+public class ProfessorBusiness extends AbstracBusiness<Professor> implements LocalProfessorBusiness {
 	private static final long serialVersionUID = 2999076029877744444L;
 
-	public void salvar(Professor obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
-	public void remover(Professor obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
-	public void atualizar(Professor obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
+	@Override
 	public List<Professor> listar() {
-		throw new UnsupportedOperationException();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public Professor buscar(Long id) {
-		throw new UnsupportedOperationException();
+	@Override
+	public Long getObjectKey(Professor object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	
 
 }

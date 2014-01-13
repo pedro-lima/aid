@@ -13,7 +13,7 @@ public class Endereco {
 	private String cep;
 	private String cidade;
 	@Enumerated(EnumType.STRING)
-	private Estado estado;
+	private Estado estado = Estado.AC;
 
 	public Endereco() {
 		super();

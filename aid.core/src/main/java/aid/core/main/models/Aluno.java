@@ -1,56 +1,37 @@
 package aid.core.main.models;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import aid.core.main.enumerations.Curso;
+import aid.core.main.interfaces.Discente;
 
 @Entity
-public class Aluno extends PessoaFisica {
+public class Aluno extends PessoaAcademica implements Discente {
 	private static final long serialVersionUID = 1L;
-	private String matricula;
 	@Enumerated(EnumType.STRING)
-	private Curso curso;
-	@Min(value=1,message="O valor não pode ser menor que 8.")
-	@Max(value=8,message="O valor não pode ser menor que 1.")
+	private Curso curso = Curso.CC;
 	private int periodo;
-	@ManyToOne
-	private Turma turma;
 	@OneToMany(mappedBy = "aluno")
-	private List<Montagem> montagens = new ArrayList<Montagem>();
+	private List<Montagem> montagens;
 	@OneToMany(mappedBy = "aluno")
-	private List<Homologacao> homologacoes = new ArrayList<Homologacao>();
+	private List<Homologacao> homologacoes;
 	@OneToMany(mappedBy = "aluno")
-	private List<Descarte> descartes = new ArrayList<Descarte>();
+	private List<Descarte> descartes;
 	@OneToMany(mappedBy = "aluno")
-	private List<Ponto> pontos = new ArrayList<Ponto>();
-
+	private List<Ponto> pontos;
+	
 	public Aluno() {
 		super();
 	}
 
-	public Aluno(String nome, String cpf, String rg, Contato contato,
-			Endereco endereco, String matricula, Curso curso, int periodo,
-			Turma turma) {
-		super(nome, cpf, rg, contato, endereco);
-		this.matricula = matricula;
+	public Aluno(String matricula, Usuario usuario, PessoaFisica pessoaFisica,
+			Curso curso, int periodo) {
+		super(matricula, usuario, pessoaFisica);
 		this.curso = curso;
 		this.periodo = periodo;
-		this.turma = turma;
-	}
-
-	public String getMatricula() {
-		return matricula;
-	}
-
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
 	}
 
 	public Curso getCurso() {
@@ -67,14 +48,6 @@ public class Aluno extends PessoaFisica {
 
 	public void setPeriodo(int periodo) {
 		this.periodo = periodo;
-	}
-
-	public Turma getTurma() {
-		return turma;
-	}
-
-	public void setTurma(Turma turma) {
-		this.turma = turma;
 	}
 
 	public List<Montagem> getMontagens() {
@@ -107,6 +80,6 @@ public class Aluno extends PessoaFisica {
 
 	public void setPontos(List<Ponto> pontos) {
 		this.pontos = pontos;
-	}
+	}	
 
 }

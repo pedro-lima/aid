@@ -22,13 +22,13 @@ public class ListarSoftwareBean implements Serializable {
 	@Inject
 	private Message mensagem;
 	@Inject
-	private HttpSession session;
+	private HttpSession session;	
 	private List<Software> softwareCollection;
 	@Inject
 	private Software software;
 
 	@PostConstruct
-	public void init() {
+	public void init() {	
 		this.buscar();
 	}
 
@@ -64,16 +64,12 @@ public class ListarSoftwareBean implements Serializable {
 		this.software = software;
 	}
 
-	public boolean isDelete(Software software) {
-		return this.business.isDelete(software.getId());
-	}
-
 	public void detalheSoftware(Software software) {
 		this.software = software;
 	}
-
+	
 	public void buscar() {
-		this.softwareCollection = this.business.listar();		
+		this.softwareCollection = this.business.listar();
 	}
 
 	public void remover(Software software) {

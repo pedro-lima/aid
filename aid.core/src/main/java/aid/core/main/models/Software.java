@@ -3,11 +3,13 @@ package aid.core.main.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
@@ -16,20 +18,23 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.Type;
+
 import aid.core.main.enumerations.TipoSoftware;
 
 @Entity
 @NamedQueries({
 
-@NamedQuery(name = "software.listAll.new", query = "SELECT NEW aid.core.main.models.Software(s.id, s.marca, s.modelo, s.observacao, s.tipo, COUNT(h.id)) "
-		+ "FROM Software s LEFT JOIN s.homologacoes h "
-		+ "GROUP BY s.id, s.marca, s.modelo, s.observacao, s.tipo"),
-		@NamedQuery(name="software.delete",query="DELETE FROM Software o WHERE o.id LIKE :id")})
+		@NamedQuery(name = "software.listAll.new", query = "SELECT NEW aid.core.main.models.Software(s.id, s.marca, s.modelo, s.observacao, s.tipo, COUNT(h.id)) "
+				+ "FROM Software s LEFT JOIN s.homologacoes h "
+				+ "GROUP BY s.id, s.marca, s.modelo, s.observacao, s.tipo"),
+		@NamedQuery(name = "software.delete", query = "DELETE FROM Software o WHERE o.id LIKE :id"),
+		@NamedQuery(name = "software.count", query = "SELECT COUNT(o) FROM Software o") })
 public class Software implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Size(min = 2, max = 150, message = "A marca do software deve conter entre {min} e {max} caracteres.")
 	@Column(length = 150, nullable = false)
@@ -119,7 +124,7 @@ public class Software implements Serializable {
 	public void setTotalHomologacoes(Long totalHomologacoes) {
 		this.totalHomologacoes = totalHomologacoes;
 	}
-	
+
 	public boolean semHomologacoes() {
 		return this.totalHomologacoes.intValue() == 0;
 	}

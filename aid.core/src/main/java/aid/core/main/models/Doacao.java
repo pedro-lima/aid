@@ -2,6 +2,7 @@ package aid.core.main.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class Doacao implements Serializable {
 	private Homologacao homologacao;
 	@ManyToOne
 	private Professor profesor;
-	@OneToOne(mappedBy = "doacao")
+	@OneToOne(cascade = CascadeType.ALL)
 	private Beneficiado beneficiado;
 
 	public Doacao() {

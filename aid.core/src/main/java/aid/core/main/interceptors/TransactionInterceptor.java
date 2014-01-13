@@ -25,6 +25,7 @@ public class TransactionInterceptor {
 			tx.commit();
 			return retorno;
 		} catch (Exception e) {
+			e.printStackTrace();
 			if (tx != null)
 				tx.rollback();
 			return e;

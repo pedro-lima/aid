@@ -12,27 +12,28 @@
 		<p:growl id="grow" showDetail="true" globalOnly="true" />
 		<p:panel id="panel" header="Listar Software" toggleable="false">
 			<p:focus context="panel" />
-			<p:dataTable id="listagem" var="soft"
-				value="#{listarSoftwareBean.softwareCollection}" paginator="true"
-				rows="50" currentPageReportTemplate="{currentPage} de {totalPages}"
-				emptyMessage="Não existem softwares cadastrados."
-				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">				
-				<p:column sortBy="marca" headerText="Marca">
-					<h:outputText value="#{soft.marca}" />
-				</p:column>
-				<p:column sortBy="modelo" headerText="Modelo">
-					<h:outputText value="#{soft.modelo}" />
-				</p:column>
-				<p:column sortBy="tipo" headerText="Tipo">
-					<h:outputText value="#{soft.tipo.nome}" />
-				</p:column>
-				<p:column style="width:15%;text-align: center;" headerText="Ação">
-					<h:form prependId="false">
+			<h:form id="form" prependId="false">
+				<p:dataTable id="dataTable" var="soft"
+					value="#{listarSoftwareBean.softwareCollection}" paginator="true"
+					rows="50" emptyMessage="Não existem softwares cadastrados."
+					currentPageReportTemplate="{currentPage} de {totalPages}"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+					<p:column sortBy="marca" headerText="Marca">
+						<h:outputText value="#{soft.marca}" />
+					</p:column>
+					<p:column sortBy="modelo" headerText="Modelo">
+						<h:outputText value="#{soft.modelo}" />
+					</p:column>
+					<p:column sortBy="tipo" headerText="Tipo">
+						<h:outputText value="#{soft.tipo.nome}" />
+					</p:column>
+					<p:column style="width:15%;text-align: center;" headerText="Ação">
 						<p:commandButton
-							actionListener="#{listarSoftwareBean.remover(soft)}" rendered="#{soft.semHomologacoes()}"
-							update=":grow,:listagem" icon="ui-icon-trash">
-							<p:confirm header="#{msg.confirmacao_cabecalho}" message="#{msg.confirmacao_mensagem}"
-								icon="ui-icon-alert" />
+							actionListener="#{listarSoftwareBean.remover(soft)}"
+							rendered="#{soft.semHomologacoes()}"
+							update=":grow,:form:dataTable" icon="ui-icon-trash">
+							<p:confirm header="#{msg.confirmacao_cabecalho}"
+								message="#{msg.confirmacao_mensagem}" icon="ui-icon-alert" />
 						</p:commandButton>
 						<p:commandButton icon="ui-icon-document"
 							onclick="PF('dlg').show()" update=":gridDetail"
@@ -40,11 +41,11 @@
 						</p:commandButton>
 						<p:commandButton icon="ui-icon-pencil" ajax="false"
 							action="#{listarSoftwareBean.editarSoftware(soft)}" />
-					</h:form>
-				</p:column>
-			</p:dataTable>
+					</p:column>
+				</p:dataTable>
+			</h:form>
 		</p:panel>
-		<p:blockUI block="listagem" trigger="listagem">
+		<p:blockUI block="form:dataTable" trigger="form:dataTable">
 			<span>#{msg.carregando}</span>
 			<br />
 			<h:graphicImage library="images" name="load2.gif" />
@@ -54,7 +55,6 @@
 				closable="false">
 				<p:commandButton value="#{msg.sim}" type="button"
 					styleClass="ui-confirmdialog-yes" icon="ui-icon-check">
-					<p:ajax event="click" listener="#{listarSoftwareBean.buscar}" />
 				</p:commandButton>
 				<p:commandButton value="#{msg.nao}" type="button"
 					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
@@ -65,7 +65,6 @@
 			<h:panelGrid columns="2" cellpadding="5" id="gridDetail">
 				<h:outputText value="Marca"></h:outputText>
 				<h:outputText value="#{listarSoftwareBean.software.marca}"></h:outputText>
-
 
 				<h:outputText value="Modelo" />
 				<h:outputText value="#{listarSoftwareBean.software.modelo}" />

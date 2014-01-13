@@ -2,15 +2,11 @@ package aid.core.main.models;
 
 import java.io.Serializable;
 import javax.persistence.Embeddable;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 
 @Embeddable
 public class Contato implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@NotBlank
-	private String telefone;
-	@Email(message="Email inválido.")
+	private String telefone;	
 	private String email;
 	
 	public Contato() {

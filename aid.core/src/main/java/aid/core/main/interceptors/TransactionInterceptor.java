@@ -6,14 +6,18 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+
+import org.apache.log4j.Logger;
+
 import aid.core.main.annotations.Transaction;
 
 @Interceptor
 @Transaction
 public class TransactionInterceptor {
-
 	@Inject
 	private EntityManager manager;
+	@Inject
+	private Logger log;
 
 	@AroundInvoke
 	public Object gerenciaTransacao(InvocationContext context) {
@@ -25,7 +29,7 @@ public class TransactionInterceptor {
 			tx.commit();
 			return retorno;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e);
 			if (tx != null)
 				tx.rollback();
 			return e;

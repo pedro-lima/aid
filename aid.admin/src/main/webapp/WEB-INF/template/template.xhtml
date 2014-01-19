@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type"></meta>
+			<meta name="author" content="Pedro Victor Lima"></meta>
+			<title>AID</title>
+		</f:facet>
+
+		<ui:remove>
+			<link type="text/css" rel="stylesheet"
+				href="#{request.contextPath}/resources/css/jquery-ui-1.10.4.custom.css" />
+		</ui:remove>
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/resources/css/default.css" />
+
+		<link rel="icon" type="image/x-icon"
+			href="#{request.contextPath}/resources/icons/aid.ico" />
+
+		<base href="#{request.contextPath}/"></base>
+	</h:head>
+	<h:body style="background:#B9CEF0">
+		<ui:debug hotkey="z"></ui:debug>		
+
+		<p:ajaxStatus
+			style="width:64px;height:64px;position:fixed;right:50px;bottom:50px;z-index: 1;"
+			id="ajaxStatusPanel">
+			<f:facet name="start">
+				<h:graphicImage library="images" name="load.gif" />
+			</f:facet>
+			<f:facet name="complete">
+				<h:outputText value="" />
+			</f:facet>
+		</p:ajaxStatus>
+
+
+		<p:layout fullPage="true">
+
+			<p:layoutUnit position="north" size="80">
+				<b>AID</b>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="south" size="60">
+				Desenvolvido por <a href="mailto:pedro_jampa86@yahoo.com.br"
+					target="_top">Pedro Victor Lima</a>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="west" size="210" header="#{msg.menu}"
+				resizable="true" collapsible="true">
+				<ui:include src="/WEB-INF/template/menu.xhtml"></ui:include>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+				<h:form id="form" prependId="false">
+					<ui:insert name="content">O que estiver aqui será substituido!</ui:insert>
+				</h:form>
+			</p:layoutUnit>
+
+		</p:layout>
+
+	</h:body>
+
+</f:view>
+</html>

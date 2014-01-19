@@ -1,13 +1,15 @@
 package aid.core.main.messages;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import aid.core.main.interfaces.Message;
 
+@RequestScoped
 public class AddFacesMessage implements Message {
 	private static final long serialVersionUID = -3630271582798358952L;
-	@Inject
+	@Inject	
 	private FacesContext context;
 
 	public void mensagemAlert(String titulo, String mensagem) {

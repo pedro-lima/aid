@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class ProdutorEntityManager implements Serializable {	
+public class EntityManagerProducer implements Serializable {	
 	private static final long serialVersionUID = -2549640682431112006L;
 	
 	@Produces

@@ -2,9 +2,9 @@ package aid.core.main.enumerations;
 
 import java.io.Serializable;
 
-public enum TipoSoftware implements Serializable{
-	SistemaOperacional("Sistema Operacional"), AntiVirus("Antivírus"), Driver(
-			"Driver"), Aplicativo("Aplicativo");
+public enum TipoSoftware implements Serializable {
+	Aplicativo("Aplicativo"), AntiVirus("Antivírus"), Driver(
+			"Driver"), SistemaOperacional("Sistema Operacional");
 	private String nome;
 
 	private TipoSoftware(String nome) {

@@ -5,40 +5,65 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 <body>
-	<ui:composition template="/template/template.xhtml">
+	<ui:composition template="/WEB-INF/template/template.xhtml">
 		<ui:define name="content">
-			<p:messages id="mensagens" globalOnly="false"></p:messages>
 			<p:growl id="grow" showDetail="true" globalOnly="true"></p:growl>
-			<h:form id="form" prependId="false">
-				<p:panel id="panel" header="Cadastrar Software" toggleable="false">
+			<p:messages severity="error"></p:messages>
+			<div align="center">
+				<p:panel id="panel" header="#{msg.cadastrar_software}"
+					toggleable="false">
 					<p:focus context="panel" />
 					<h:panelGrid columns="2">
-						<h:outputText value="Marca"></h:outputText>
-						<h:inputText value="#{salvarSoftwareBean.software.marca}" />
-						<h:outputText value="Modelo" />
-						<h:inputText value="#{salvarSoftwareBean.software.modelo}" />
-						<h:outputText value="Observação" />
-						<p:inputTextarea rows="6" cols="33"
-							value="#{salvarSoftwareBean.software.observacao}"></p:inputTextarea>
-						<h:outputText value="Tipo"></h:outputText>
-						<p:selectOneMenu value="#{salvarSoftwareBean.software.tipo}"
-							style="width:200px">
-							<f:selectItems value="#{salvarSoftwareBean.tipoSoftwares}"
-								var="tipo" itemValue="#{tipo}" itemLabel="#{tipo.nome}"></f:selectItems>
-						</p:selectOneMenu>
-					</h:panelGrid>
-					<p:commandButton actionListener="#{salvarSoftwareBean.salvar}"
-						value="Salvar" update=":mensagens,:grow,:form"
-						oncomplete="slowHideMessages()">
-					</p:commandButton>
-					<p:commandButton value="Limpar">
-						<p:ajax event="click" update=":form"
-							listener="#{salvarSoftwareBean.limpar}" />
-					</p:commandButton>
-				</p:panel>
-			</h:form>
-		</ui:define>
+						<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+							cellpadding="5" style="width:100%">
+							<h:outputText value="#{msg.software_marca}"></h:outputText>
+							<h:inputText id="marca" value="#{softwareBean.software.marca}" />
 
+							<h:outputText value="#{msg.software_modelo}" />
+							<h:inputText id="modelo" value="#{softwareBean.software.modelo}" />
+
+							<h:outputText value="#{msg.software_tipo}"></h:outputText>
+							<p:selectOneMenu id="tipo" value="#{softwareBean.software.tipo}"
+								style="width:200px">
+								<f:selectItems value="#{softwareBean.tipoSoftwares}" var="tipo"
+									itemValue="#{tipo}" itemLabel="#{tipo.nome}"></f:selectItems>
+							</p:selectOneMenu>
+
+						</h:panelGrid>
+						<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+							cellpadding="5" style="vertical-align: top;">
+
+							<h:outputText value="#{msg.software_observacao}" />
+							<p:inputTextarea rows="10" cols="60"
+								value="#{softwareBean.software.observacao}"></p:inputTextarea>
+
+						</h:panelGrid>
+					</h:panelGrid>
+					<br />
+					<div>
+						<p:commandButton id="saveBtn"
+							actionListener="#{softwareBean.salvar}"
+							value="#{msg.botao_salvar}" update=":form"
+							styleClass="button-form" icon="ui-icon-disk">
+						</p:commandButton>
+						<p:commandButton id="cleanBtn"
+							actionListener="#{softwareBean.limpar}" update=":form"
+							value="#{msg.botao_limpar}" process="@this"
+							icon="ui-icon-refresh" styleClass="button-form" />
+					</div>
+				</p:panel>
+			</div>
+			<p:blockUI block="form" trigger="saveBtn">
+				<span>#{msg.carregando}</span>
+				<br />
+				<h:graphicImage library="images" name="load2.gif" />
+			</p:blockUI>
+			<p:blockUI block="form" trigger="cleanBtn">
+				<span>#{msg.carregando}</span>
+				<br />
+				<h:graphicImage library="images" name="load2.gif" />
+			</p:blockUI>
+		</ui:define>
 	</ui:composition>
 </body>
 </html>

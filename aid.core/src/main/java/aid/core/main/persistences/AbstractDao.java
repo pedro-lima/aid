@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
-import aid.core.main.annotations.Transaction;
 import aid.core.main.interfaces.Dao;
 import aid.core.main.pojos.QueryParam;
 
@@ -22,17 +21,14 @@ public abstract class AbstractDao<T> implements Dao<T> {
 		this.em = em;
 	}
 
-	@Transaction
 	public void salvar(T obj) {
 		this.em.persist(obj);
 	}
 
-	@Transaction
 	public void remover(T obj) {
 		this.em.remove(obj);
 	}
 
-	@Transaction
 	public T atualizar(T obj) {
 		return (T) this.em.merge(obj);
 	}

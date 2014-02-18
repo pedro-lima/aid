@@ -1,31 +1,27 @@
 package aid.core.main.business;
 
-import java.util.List;
-import aid.core.main.exceptions.CRUDException;
-import aid.core.main.interfaces.Business;
+import javax.inject.Inject;
+
+import aid.core.main.annotations.Business;
+import aid.core.main.interfaces.business.LocalMontagemBusiness;
+import aid.core.main.interfaces.dao.Dao;
+import aid.core.main.interfaces.dao.LocalMontagemDao;
 import aid.core.main.models.Montagem;
 
-public class MontagemBusiness implements Business<Montagem> {
+@Business
+public class MontagemBusiness extends AbstracBusiness<Montagem> implements
+		LocalMontagemBusiness {
 	private static final long serialVersionUID = -7155454345123708665L;
+	@Inject
+	private LocalMontagemDao dao;
 
-	public void salvar(Montagem obj) throws CRUDException {
-		throw new UnsupportedOperationException();
+	public MontagemBusiness() {
+		super();
 	}
 
-	public void remover(Montagem obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
-	public void atualizar(Montagem obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
-	public List<Montagem> listar() {
-		throw new UnsupportedOperationException();
-	}
-
-	public Montagem buscar(Long id) {
-		throw new UnsupportedOperationException();
+	@Override
+	protected Dao<Montagem> getDao() {
+		return this.dao;
 	}
 
 }

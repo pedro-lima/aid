@@ -17,25 +17,36 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Homologacao implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Homologacao extends AbstracModel implements Serializable {
+
+	private static final long serialVersionUID = -7217852355207159756L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataInicio;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataFim;
+
 	private String observacao;
+
 	private boolean finalizado = false;
+
 	@ManyToOne
 	private Aluno aluno;
+
 	@OneToOne(mappedBy = "homologacao")
 	private Montagem montagem;
+
 	@ManyToMany(mappedBy = "homologacoes")
 	private List<Software> softwares = new ArrayList<Software>();
+
 	@OneToMany(mappedBy = "homologacao")
 	private List<ItemHomologacao> itens = new ArrayList<ItemHomologacao>();
+
 	@OneToOne
 	private Doacao doacao;
 

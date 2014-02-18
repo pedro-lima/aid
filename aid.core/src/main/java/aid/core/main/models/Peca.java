@@ -2,7 +2,6 @@ package aid.core.main.models;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,21 +12,30 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Peca implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Peca extends AbstracModel implements Serializable {
+	
+	private static final long serialVersionUID = 8063916386647508749L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
+	
 	private String marca;
+	
 	private String capacidade;
+	
 	private String observcao;
+	
 	private String qrCode;
 	@ManyToOne
 	private Doador doador;
+	
 	@ManyToOne
 	private Montagem montagem;
+	
 	@OneToOne
 	private Descarte descarte;
 

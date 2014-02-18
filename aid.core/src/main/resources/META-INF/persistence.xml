@@ -2,8 +2,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
+
 	<persistence-unit name="aid" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<mapping-file>/META-INF/orm.xml</mapping-file>
 		<class>aid.core.main.models.Administrador</class>
 		<class>aid.core.main.models.Aluno</class>
 		<class>aid.core.main.models.Beneficiado</class>
@@ -16,7 +18,6 @@
 		<class>aid.core.main.models.ItemHomologacao</class>
 		<class>aid.core.main.models.Montagem</class>
 		<class>aid.core.main.models.Peca</class>
-		<class>aid.core.main.models.PessoaAcademica</class>
 		<class>aid.core.main.models.PessoaFisica</class>
 		<class>aid.core.main.models.Ponto</class>
 		<class>aid.core.main.models.Professor</class>
@@ -29,8 +30,6 @@
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="1234" />
 
-			<property name="connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
-			
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
@@ -40,6 +39,9 @@
 			<property name="hibernate.c3p0.timeout" value="300" />
 			<property name="hibernate.c3p0.max_statements" value="50" />
 			<property name="hibernate.c3p0.idle_test_period" value="3000" />
+
+			<property name="hibernate.temp.use_jdbc_metadata_defaults"
+				value="false" />
 		</properties>
 	</persistence-unit>
 </persistence>    

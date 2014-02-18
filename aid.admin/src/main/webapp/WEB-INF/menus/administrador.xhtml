@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:form>
+		<p:menu>
+			<p:submenu label="#{msg.menu_principal}">
+				<p:menuitem value="#{msg.menu_inicial}" icon="ui-icon-home" />				
+				<p:menuitem value="#{msg.menu_sair}" icon="ui-icon-power" />
+			</p:submenu>
+		</p:menu>
+
+		<p:menu>
+			<p:submenu label="#{msg.menu_acesso}">
+				<p:menuitem value="#{msg.menu_aluno}" icon="ui-icon-person" />
+				<p:menuitem value="#{msg.menu_professor}" icon="ui-icon-person" />
+			</p:submenu>
+		</p:menu>
+		
+		<p:menu>
+			<p:submenu label="#{msg.menu_relatorio}">
+				<p:menuitem value="#{msg.menu_ponto}" icon="ui-icon-check" />
+			</p:submenu>
+		</p:menu>
+	</h:form>
+</ui:composition>
+</html>

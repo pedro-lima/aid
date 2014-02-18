@@ -1,15 +1,10 @@
 package aid.core.main.exceptions;
 
-public class LoginException extends Exception {
+public class LoginException extends AIDException {
 	private static final long serialVersionUID = 1L;
 
 	public LoginException() {
 		super();
-	}
-
-	public LoginException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
 	public LoginException(String message, Throwable cause) {
@@ -22,6 +17,6 @@ public class LoginException extends Exception {
 
 	public LoginException(Throwable cause) {
 		super(cause);
-	}	
-
+	}
+	
 }

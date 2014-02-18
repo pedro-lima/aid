@@ -10,21 +10,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-public class Descarte implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Descarte extends AbstracModel implements Serializable {
+
+	private static final long serialVersionUID = -4072714103101874964L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
+	
 	@NotBlank
 	private String justificativa;
+	
 	@OneToOne(mappedBy = "descarte")
 	private Peca peca;
+	
 	@ManyToOne
 	private Aluno aluno;
 
@@ -38,8 +43,8 @@ public class Descarte implements Serializable {
 		this.peca = peca;
 		this.justificativa = justificativa;
 		this.aluno = aluno;
-	}
-
+	}	
+	
 	public Long getId() {
 		return id;
 	}

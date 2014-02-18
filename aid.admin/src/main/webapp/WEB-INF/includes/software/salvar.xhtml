@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<p:dialog id="panelSalvar" widgetVar="pnlSalvar" closable="true"
+			modal="true" appendTo="@(body)" header="#{softwareBean.nomePanel}"
+			resizable="false" showEffect="fade" hideEffect="explode">
+			<p:ajax event="close" listener="#{softwareBean.limpar}"
+				update="formSalvar" />
+			<h:form id="formSalvar" prependId="false">
+				<div align="center">
+					<p:messages id="mensagensSalvar" closable="true" />
+					<h:panelGrid columns="2">
+						<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+							cellpadding="5" style="width:100%">
+							<h:outputText value="#{msg.software_marca}"></h:outputText>
+							<p:inputText value="#{softwareBean.software.marca}"
+								style="width: 300px;" />
+
+							<h:outputText value="#{msg.software_modelo}" />
+							<p:inputText value="#{softwareBean.software.modelo}"
+								style="width: 300px;" />
+
+
+							<h:outputText value="#{msg.software_tipo}"></h:outputText>
+							<p:selectOneMenu value="#{softwareBean.software.tipo}"
+								style="width:300px;">
+								<f:selectItems value="#{softwareBean.tipoSoftwares}" var="tipo"
+									itemValue="#{tipo}" itemLabel="#{tipo.nome}"></f:selectItems>
+							</p:selectOneMenu>
+						</h:panelGrid>
+						<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+							cellpadding="5" style="vertical-align: top;">
+
+							<h:outputText value="#{msg.software_observacao}" />
+							<p:inputTextarea value="#{softwareBean.software.observacao}"></p:inputTextarea>
+						</h:panelGrid>
+					</h:panelGrid>
+					<br />
+					<div>
+						<p:commandButton actionListener="#{softwareBean.salvar}"
+							rendered="#{softwareBean.novoSoftware}"
+							value="#{msg.botao_salvar}" update="formSalvar"
+							oncomplete="if(args &amp;&amp; !args.validationFailed){ updateList(); $('#mensagens').hide();}"
+							icon="ui-icon-disk">
+						</p:commandButton>
+						<p:commandButton actionListener="#{softwareBean.salvar}"
+							rendered="#{!(softwareBean.novoSoftware)}"
+							value="#{msg.botao_salvar}" update="formSalvar,:mensagens"
+							icon="ui-icon-disk"
+							oncomplete="if(args &amp;&amp; !args.validationFailed){ $('#mensagensSalvar').hide(); pnlSalvar.hide(); updateList(); } else{$('#mensagens').hide();}">
+						</p:commandButton>
+						<p:commandButton actionListener="#{softwareBean.limpar}"
+							rendered="#{softwareBean.novoSoftware}" update="formSalvar"
+							value="#{msg.botao_limpar}" process="@this"
+							icon="ui-icon-refresh" styleClass="button-form">
+						</p:commandButton>
+					</div>
+				</div>
+			</h:form>
+		</p:dialog>
+	</ui:composition>
+</body>
+</html>

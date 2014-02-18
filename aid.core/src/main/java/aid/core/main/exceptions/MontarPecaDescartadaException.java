@@ -1,15 +1,10 @@
 package aid.core.main.exceptions;
 
-public class MontarPecaDescartadaException extends Exception {
+public class MontarPecaDescartadaException extends AIDException {
 	private static final long serialVersionUID = 1L;
 
 	public MontarPecaDescartadaException() {
 		super();
-	}
-
-	public MontarPecaDescartadaException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
 	public MontarPecaDescartadaException(String message, Throwable cause) {

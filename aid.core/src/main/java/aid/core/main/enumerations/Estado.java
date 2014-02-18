@@ -1,6 +1,8 @@
 package aid.core.main.enumerations;
 
-public enum Estado {
+import java.io.Serializable;
+
+public enum Estado implements Serializable {
 	AC("Acre"), AL("Alagoas"), AP("Amap�"), AM("Amazonas"), BA("Bahia"), CE(
 			"Cear�"), DF("Distrito Federal"), ES("Esp�rito Santo"), GO("Goi�s"), MA(
 			"Maranh�o"), MT("Mato Grosso"), MS("Mato Grosso do Sul"), MG(

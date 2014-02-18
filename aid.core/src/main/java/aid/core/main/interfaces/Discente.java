@@ -1,5 +1,6 @@
 package aid.core.main.interfaces;
 
-public interface Discente {
+
+public interface Discente extends Perfil {
 
 }

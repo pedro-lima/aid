@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13880000381910" configfile="/aid.admin/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="homologacao/software/listar.xhtml" x="122" y="178" id="pf13888872133010" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf13888872133011" path="/homologacao/software/listar.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="homologacao/software/cadastrar.xhtml" x="338" y="178" id="pf13888872133013" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf13888872133011" path="/homologacao/software/cadastrar.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="doacao/beneficiado/listar.xhtml" id="pf13888872434014" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf13888872434015" path="/doacao/beneficiado/listar.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="doacao/beneficiado/cadastrar.xhtml" id="pf13888872434016" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf13888872434015" path="/doacao/beneficiado/cadastrar.xhtml"/>
-  <links id="pf13888872133011" target="pf13888872133013" source="pf13888872133010" outcome="cadastrar_software"/>
-  <links id="pf13888872434015" target="pf13888872434016" source="pf13888872434014" outcome="cadastrar_beneficiado"/>
-</pageflow:Pageflow>

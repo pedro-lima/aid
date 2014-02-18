@@ -1,24 +1,27 @@
 package aid.core.main.business;
 
-import java.util.List;
-import aid.core.main.interfaces.LocalAlunoBusiness;
+import javax.inject.Inject;
+
+import aid.core.main.annotations.Business;
+import aid.core.main.interfaces.business.LocalAlunoBusiness;
+import aid.core.main.interfaces.dao.Dao;
+import aid.core.main.interfaces.dao.LocalAlunoDao;
 import aid.core.main.models.Aluno;
 
-public class AlunoBusiness extends AbstracBusiness<Aluno> implements LocalAlunoBusiness {
+@Business
+public class AlunoBusiness extends AbstracBusiness<Aluno> implements
+		LocalAlunoBusiness {
 	private static final long serialVersionUID = 6889283625039167997L;
+	@Inject
+	private LocalAlunoDao dao;
 
-	@Override
-	public List<Aluno> listar() {
-		// TODO Auto-generated method stub
-		return null;
+	public AlunoBusiness() {
+		super();
 	}
 
 	@Override
-	public Long getObjectKey(Aluno object) {
-		// TODO Auto-generated method stub
-		return null;
+	protected Dao<Aluno> getDao() {
+		return this.dao;
 	}
-
-
 
 }

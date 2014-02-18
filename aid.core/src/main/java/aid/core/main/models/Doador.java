@@ -9,21 +9,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-public class Doador implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Doador extends AbstracModel implements Serializable {
+
+	private static final long serialVersionUID = -5538169288159219886L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@NotBlank
 	private String nome;
+	
 	@Embedded
 	private Contato contato = new Contato();
+	
 	@Embedded
 	private Endereco endereco = new Endereco();
+	
 	@OneToMany(mappedBy = "doador")
 	private List<Peca> pecas = new ArrayList<Peca>();
 
@@ -31,13 +36,12 @@ public class Doador implements Serializable {
 		super();
 	}
 
-	public Doador(Long id, String nome, Contato contato, Endereco endereco) {
+	public Doador(String nome, Contato contato, Endereco endereco) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.contato = contato;
 		this.endereco = endereco;
-	}
+	}	
 
 	public Long getId() {
 		return id;

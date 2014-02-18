@@ -1,6 +1,8 @@
 package aid.core.main.enumerations;
 
-public enum TipoPeca {
+import java.io.Serializable;
+
+public enum TipoPeca implements Serializable {
 	Gabinete("Gabinete"), Fonte("Fonto"), PlacaMae("Placa M�e"), Processador(
 			"Processador"), HD("HD"), PlacaVideo("Placa de V�deo"), PlaceRede(
 			"Placa de Rede"), Modem("Modem"), Fax("Fax"), CdRom("CD-Rom"), DvdRom(

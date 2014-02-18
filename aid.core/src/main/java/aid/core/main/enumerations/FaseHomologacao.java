@@ -1,7 +1,9 @@
 package aid.core.main.enumerations;
 
-public enum FaseHomologacao {
-	Micro("Micro"), Macro("Macro"), Perifericos("Perifï¿½ricos"), Estabilizador(
+import java.io.Serializable;
+
+public enum FaseHomologacao implements Serializable {
+	Micro("Micro"), Macro("Macro"), Perifericos("Periféricos"), Estabilizador(
 			"Estabilizador"), Impressora("Impressora");
 	private String nome;
 

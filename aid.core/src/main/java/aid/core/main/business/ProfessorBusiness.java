@@ -1,25 +1,27 @@
 package aid.core.main.business;
 
-import java.util.List;
+import javax.inject.Inject;
 
-import aid.core.main.interfaces.LocalProfessorBusiness;
+import aid.core.main.annotations.Business;
+import aid.core.main.interfaces.business.LocalProfessorBusiness;
+import aid.core.main.interfaces.dao.Dao;
+import aid.core.main.interfaces.dao.LocalProfessorDao;
 import aid.core.main.models.Professor;
 
-public class ProfessorBusiness extends AbstracBusiness<Professor> implements LocalProfessorBusiness {
+@Business
+public class ProfessorBusiness extends AbstracBusiness<Professor> implements
+		LocalProfessorBusiness {
 	private static final long serialVersionUID = 2999076029877744444L;
+	@Inject
+	private LocalProfessorDao dao;
 
-	@Override
-	public List<Professor> listar() {
-		// TODO Auto-generated method stub
-		return null;
+	public ProfessorBusiness() {
+		super();
 	}
 
 	@Override
-	public Long getObjectKey(Professor object) {
-		// TODO Auto-generated method stub
-		return null;
+	protected Dao<Professor> getDao() {
+		return this.dao;
 	}
-
-	
 
 }

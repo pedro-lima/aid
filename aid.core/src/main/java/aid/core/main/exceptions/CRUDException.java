@@ -1,15 +1,10 @@
 package aid.core.main.exceptions;
 
-public class CRUDException extends Exception {
+public class CRUDException extends AIDException {
 	private static final long serialVersionUID = 1L;
 
 	public CRUDException() {
 		super();
-	}
-
-	public CRUDException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
 	public CRUDException(String message, Throwable cause) {
@@ -22,6 +17,6 @@ public class CRUDException extends Exception {
 
 	public CRUDException(Throwable cause) {
 		super(cause);
-	}
-	
+	}	
+
 }

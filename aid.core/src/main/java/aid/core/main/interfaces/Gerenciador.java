@@ -1,5 +1,6 @@
 package aid.core.main.interfaces;
 
-public interface Gerenciador {
+
+public interface Gerenciador extends Perfil {
 
 }

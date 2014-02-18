@@ -1,31 +1,27 @@
 package aid.core.main.business;
 
-import java.util.List;
-import aid.core.main.exceptions.CRUDException;
-import aid.core.main.interfaces.Business;
+import javax.inject.Inject;
+
+import aid.core.main.annotations.Business;
+import aid.core.main.interfaces.business.LocalHomologacaoBusiness;
+import aid.core.main.interfaces.dao.Dao;
+import aid.core.main.interfaces.dao.LocalHomologacaoDao;
 import aid.core.main.models.Homologacao;
 
-public class HomologacaoBusiness implements Business<Homologacao> {
+@Business
+public class HomologacaoBusiness extends AbstracBusiness<Homologacao> implements
+		LocalHomologacaoBusiness {
 	private static final long serialVersionUID = -4406735515592464020L;
+	@Inject
+	private LocalHomologacaoDao dao;
 
-	public void salvar(Homologacao obj) throws CRUDException {
-		throw new UnsupportedOperationException();
+	public HomologacaoBusiness() {
+		super();
 	}
 
-	public void remover(Homologacao obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
-	public void atualizar(Homologacao obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
-	public List<Homologacao> listar() {
-		throw new UnsupportedOperationException();
-	}
-
-	public Homologacao buscar(Long id) {
-		throw new UnsupportedOperationException();
+	@Override
+	protected Dao<Homologacao> getDao() {
+		return this.dao;
 	}
 
 }

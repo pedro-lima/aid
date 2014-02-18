@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,20 +15,28 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Montagem implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Montagem extends AbstracModel implements Serializable {
+	
+	private static final long serialVersionUID = -8090069842260144159L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataInicio;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataFim;
+	
 	private boolean finalizado = false;
+	
 	@ManyToOne
 	private Aluno aluno;
+	
 	@OneToOne
 	private Homologacao homologacao;
+	
 	@OneToMany(mappedBy = "montagem")
 	private List<Peca> pecas = new ArrayList<Peca>();
 
@@ -108,6 +115,6 @@ public class Montagem implements Serializable {
 	public void iniciarMontagem() {
 		this.finalizado = false;
 		this.dataFim = null;
-	}
+	}	
 
 }

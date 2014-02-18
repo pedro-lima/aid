@@ -1,31 +1,27 @@
 package aid.core.main.business;
 
-import java.util.List;
-import aid.core.main.exceptions.CRUDException;
-import aid.core.main.interfaces.Business;
+import javax.inject.Inject;
+
+import aid.core.main.annotations.Business;
+import aid.core.main.interfaces.business.LocalAdministradorBusiness;
+import aid.core.main.interfaces.dao.Dao;
+import aid.core.main.interfaces.dao.LocalAdministradorDao;
 import aid.core.main.models.Administrador;
 
-public class AdministradorBusiness implements Business<Administrador> {
+@Business
+public class AdministradorBusiness extends AbstracBusiness<Administrador>
+		implements LocalAdministradorBusiness {
 	private static final long serialVersionUID = -6046015758550676516L;
+	@Inject
+	private LocalAdministradorDao dao;
 
-	public void salvar(Administrador obj) throws CRUDException {
-		throw new UnsupportedOperationException();
+	public AdministradorBusiness() {
+		super();
 	}
 
-	public void remover(Administrador obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
-	public void atualizar(Administrador obj) throws CRUDException {
-		throw new UnsupportedOperationException();
-	}
-
-	public List<Administrador> listar() {
-		throw new UnsupportedOperationException();
-	}
-
-	public Administrador buscar(Long id) {
-		throw new UnsupportedOperationException();
+	@Override
+	protected Dao<Administrador> getDao() {	
+		return this.dao;
 	}
 
 }

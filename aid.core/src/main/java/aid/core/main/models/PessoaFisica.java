@@ -1,7 +1,6 @@
 package aid.core.main.models;
 
 import java.io.Serializable;
-
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,21 +8,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class PessoaFisica implements Serializable {
+public class PessoaFisica extends AbstracModel implements Serializable {
+	
 	private static final long serialVersionUID = 1806080436517838868L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String nome;
+	
 	private String cpf;
+	
 	private String rg;
+	
 	@Embedded
 	private Contato contato = new Contato();
+	
 	@Embedded
 	private Endereco endereco = new Endereco();
 
 	public PessoaFisica() {
 		super();
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public PessoaFisica(String nome, String cpf, String rg, Contato contato,
@@ -34,15 +48,7 @@ public class PessoaFisica implements Serializable {
 		this.rg = rg;
 		this.contato = contato;
 		this.endereco = endereco;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	}	
 
 	public String getNome() {
 		return nome;

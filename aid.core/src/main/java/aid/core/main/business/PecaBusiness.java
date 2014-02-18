@@ -1,24 +1,27 @@
 package aid.core.main.business;
 
-import java.util.List;
-import aid.core.main.interfaces.LocalPecaBusiness;
+import javax.inject.Inject;
+
+import aid.core.main.annotations.Business;
+import aid.core.main.interfaces.business.LocalPecaBusiness;
+import aid.core.main.interfaces.dao.Dao;
+import aid.core.main.interfaces.dao.LocalPecaDao;
 import aid.core.main.models.Peca;
 
-public class PecaBusiness extends AbstracBusiness<Peca> implements LocalPecaBusiness {
+@Business
+public class PecaBusiness extends AbstracBusiness<Peca> implements
+		LocalPecaBusiness {
 	private static final long serialVersionUID = 8998525998074164237L;
+	@Inject
+	private LocalPecaDao dao;
 
-	@Override
-	public List<Peca> listar() {
-		// TODO Auto-generated method stub
-		return null;
+	public PecaBusiness() {
+		super();
 	}
 
 	@Override
-	public Long getObjectKey(Peca object) {
-		// TODO Auto-generated method stub
-		return null;
+	protected Dao<Peca> getDao() {
+		return this.dao;
 	}
-
-
 
 }

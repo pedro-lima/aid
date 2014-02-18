@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:form>
+		<p:menu>
+			<p:submenu label="#{msg.menu_principal}">
+				<p:menuitem value="#{msg.menu_inicial}" icon="ui-icon-home" />
+				<p:menuitem value="#{msg.menu_minha_conta}" icon="ui-icon-person" />
+				<p:menuitem value="#{msg.menu_sair}" icon="ui-icon-power" />
+			</p:submenu>
+		</p:menu>
+
+		<p:menu>
+			<p:submenu label="#{msg.menu_acesso}">
+				<p:menuitem value="#{msg.menu_aluno}" icon="ui-icon-person" />
+				<p:menuitem value="#{msg.menu_professor}" icon="ui-icon-person" />
+			</p:submenu>
+		</p:menu>
+
+		<p:menu>
+			<p:submenu label="#{msg.menu_montagem}">
+				<p:menuitem value="#{msg.menu_descarte}" icon="ui-icon-trash" />
+				<p:menuitem value="#{msg.menu_peca}" icon="ui-icon-print" />
+				<p:menuitem value="#{msg.menu_montagem}" icon="ui-icon-wrench" />
+			</p:submenu>
+		</p:menu>
+
+		<p:menu>
+			<p:submenu label="#{msg.menu_homologacao}">
+				<p:menuitem value="#{msg.menu_homologacao}" icon="ui-icon-tag" />
+				<p:menuitem value="#{msg.menu_software}" icon="ui-icon-image"
+					url="./homologacao/software/" />
+			</p:submenu>
+		</p:menu>
+
+		<p:menu>
+			<p:submenu label="#{msg.menu_doacao}">
+				<p:menuitem value="#{msg.menu_beneficiado}" icon="ui-icon-person" />
+				<p:menuitem value="#{msg.menu_doacao}" icon="ui-icon-cart" />
+				<p:menuitem value="#{msg.menu_doador}" icon="ui-icon-heart" />
+			</p:submenu>
+		</p:menu>
+
+		<p:menu>
+			<p:submenu label="#{msg.menu_relatorio}">
+				<p:menuitem value="#{msg.menu_ponto}" icon="ui-icon-check" />
+			</p:submenu>
+		</p:menu>
+	</h:form>
+</ui:composition>
+</html>

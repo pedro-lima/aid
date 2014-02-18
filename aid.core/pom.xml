@@ -12,29 +12,32 @@
 		<!-- JSF start -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-api</artifactId>			
+			<artifactId>jsf-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-impl</artifactId>			
+			<artifactId>jsf-impl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>			
+			<artifactId>servlet-api</artifactId>
 		</dependency>
 		<!-- JSF end -->
+
 		<!-- Weld start -->
 		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
 			<artifactId>weld-servlet</artifactId>
 		</dependency>
 		<!-- Weld end -->
+
 		<!-- MySql start -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<!-- MySql end -->
+
 		<!-- JUnit start -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -42,6 +45,7 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- JUnit end -->
+
 		<!-- Hibernate start -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -56,12 +60,14 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 		</dependency>
 		<!-- Hibernate end -->
-		<!-- Log4J start -->
+
+		<!-- slf4j start -->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
-		<!-- Log4J end -->
+		<!-- slf4j end -->
+
 		<!-- c3p0 start -->
 		<dependency>
 			<groupId>c3p0</groupId>
@@ -72,17 +78,49 @@
 			<artifactId>hibernate-c3p0</artifactId>
 		</dependency>
 		<!-- c3p0 end -->
+
 		<!-- JasperReport start -->
 		<dependency>
 			<groupId>jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
 		</dependency>
 		<!-- JasperReport end -->
+
+		<!-- Querydsl start -->
+		<dependency>
+			<groupId>com.mysema.querydsl</groupId>
+			<artifactId>querydsl-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.mysema.querydsl</groupId>
+			<artifactId>querydsl-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.mysema.querydsl</groupId>
+			<artifactId>querydsl-apt</artifactId>
+		</dependency>
+		<!-- Querydsl end -->
 	</dependencies>
-	
+
 	<build>
 		<finalName>aid.core</finalName>
 		<plugins>
+			<plugin>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>apt-maven-plugin</artifactId>
+				<version>1.1.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/generated-sources/java</outputDirectory>
+							<processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

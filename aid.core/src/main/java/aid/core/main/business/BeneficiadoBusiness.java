@@ -1,24 +1,27 @@
 package aid.core.main.business;
 
-import java.util.List;
-import aid.core.main.interfaces.LocalBeneficiadoBusiness;
+import javax.inject.Inject;
+
+import aid.core.main.annotations.Business;
+import aid.core.main.interfaces.business.LocalBeneficiadoBusiness;
+import aid.core.main.interfaces.dao.Dao;
+import aid.core.main.interfaces.dao.LocalBeneficiadoDao;
 import aid.core.main.models.Beneficiado;
 
+@Business
 public class BeneficiadoBusiness extends AbstracBusiness<Beneficiado> implements
 		LocalBeneficiadoBusiness {
 	private static final long serialVersionUID = -6855915019804261955L;
+	@Inject
+	private LocalBeneficiadoDao dao;
 
 	public BeneficiadoBusiness() {
 		super();
 	}
 
-	public List<Beneficiado> listar() {
-		return this.getDao().listar("beneficiado.listAll");
-	}
-
 	@Override
-	public Long getObjectKey(Beneficiado object) {
-		return object.getId();
+	protected Dao<Beneficiado> getDao() {
+		return this.dao;
 	}
 
 }

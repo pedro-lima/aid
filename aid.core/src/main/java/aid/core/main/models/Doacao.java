@@ -13,17 +13,23 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Doacao implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Doacao extends AbstracModel implements Serializable {
+	
+	private static final long serialVersionUID = -6156144552506810611L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
+	
 	@OneToOne(mappedBy = "doacao")
 	private Homologacao homologacao;
+	
 	@ManyToOne
 	private Professor profesor;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Beneficiado beneficiado;
 
@@ -38,7 +44,7 @@ public class Doacao implements Serializable {
 		this.homologacao = homologacao;
 		this.profesor = profesor;
 		this.beneficiado = beneficiado;
-	}
+	}	
 
 	public Long getId() {
 		return id;

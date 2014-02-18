@@ -1,6 +1,8 @@
 package aid.core.main.enumerations;
 
-public enum Curso {
+import java.io.Serializable;
+
+public enum Curso implements Serializable {
 	RD("Rede de Computadores", "Tecn�logo em Rede de Computadores"), TSI(
 			"Sistemas para Internet", "Tecn�logo em Sistemas para Internet"), GTI(
 			"Gest�o da Tecnologia da Informa��o",

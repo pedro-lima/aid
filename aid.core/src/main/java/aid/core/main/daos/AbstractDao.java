@@ -29,9 +29,8 @@ public abstract class AbstractDao<T extends AbstracModel> implements Dao<T> {
 		this.em.persist(obj);
 	}
 		
-	public void remover(T obj) {
-		T t = this.em.merge(obj);
-		this.em.remove(t);
+	public void remover(T obj) {		
+		this.em.remove(obj);
 	}
 
 	public T atualizar(T obj) {

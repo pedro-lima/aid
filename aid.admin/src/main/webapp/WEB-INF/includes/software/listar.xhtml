@@ -9,47 +9,13 @@
 
 <ui:composition>
 	<h:form id="formListar" prependId="false">
-		<div align="center">
-			<h:panelGrid columns="2">
-				<h:panelGrid columnClasses="label-form, campo-form" columns="2"
-					cellpadding="5" style="width:100%">
-					<h:outputText value="#{msg.software_marca}"></h:outputText>
-					<p:inputText value="#{softwareBean.marca}" />
-
-					<h:outputText value="#{msg.software_modelo}" />
-					<p:inputText value="#{softwareBean.modelo}" />
-
-					<h:outputText value="#{msg.software_tipo}"></h:outputText>
-					<p:selectOneMenu value="#{softwareBean.tipo}" style="width:200px">
-						<f:selectItems value="#{softwareBean.tipoSoftwares}" var="tipo"
-							itemValue="#{tipo}" itemLabel="#{tipo.nome}"></f:selectItems>
-					</p:selectOneMenu>
-				</h:panelGrid>
-				<h:panelGrid columnClasses="label-form, campo-form" columns="2"
-					cellpadding="5" style="vertical-align: top;">
-					<h:outputText value="#{msg.software_observacao}" />
-					<p:inputTextarea rows="10" cols="60"
-						value="#{softwareBean.observacao}"></p:inputTextarea>
-				</h:panelGrid>
-			</h:panelGrid>
-			<br />
-			<div>
-				<ui:remove>
-					<p:commandButton actionListener="#{softwareBean.pesquisar}"
-						value="Pesquisar" update=":form" icon="ui-icon-search">
-					</p:commandButton>
-					<p:commandButton actionListener="#{softwareBean.limparPesquisa}"
-						update=":form" value="#{msg.botao_limpar}" process="@this"
-						icon="ui-icon-refresh" styleClass="button-form">
-					</p:commandButton>
-				</ui:remove>
-			</div>
-		</div>
+		<ui:include src="/WEB-INF/includes/software/pesquisar.xhtml" />
 
 		<br />
 
-		<p:dataTable id="dataTable" widgetVar="data" var="soft" value="#{softwareBean.lista}"
-			paginator="true" rows="10" lazy="true" rowsPerPageTemplate="5,10,15,20,25,30"
+		<p:dataTable id="dataTable" widgetVar="data" var="soft"
+			value="#{softwareBean.lista}" paginator="true" rows="10" lazy="true"
+			rowsPerPageTemplate="5,10,15,20,25,30"
 			emptyMessage="#{msg.software_nao_existem_softwares_cadastrados}"
 			currentPageReportTemplate="{currentPage} de {totalPages}"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
@@ -65,8 +31,7 @@
 			<p:column style="width:15%;text-align: center;"
 				headerText="#{msg.comum_acao}">
 				<p:commandButton icon="ui-icon-zoomin"
-					oncomplete="PF('dlgDetalhe').show()"
-					update=":formListar:dialogDetalhe">
+					oncomplete="PF('dlgDetalhe').show()" update=":dialogDetalhe">
 					<f:setPropertyActionListener target="#{softwareBean.software}"
 						value="#{soft.software}"></f:setPropertyActionListener>
 				</p:commandButton>
@@ -77,46 +42,17 @@
 					<f:setPropertyActionListener target="#{softwareBean.novoSoftware}"
 						value="#{false}"></f:setPropertyActionListener>
 				</p:commandButton>
-				<p:commandButton actionListener="#{softwareBean.remover}"
-					rendered="#{soft.totalHomologacoes eq 0}" update=":mensagens,dataTable"
-					icon="ui-icon-trash" oncomplete="if(args &amp;&amp; !args.validationFailed){ data.getPaginator().setPage(0)}">
+				<p:commandButton action="#{softwareBean.remover}"
+					rendered="#{soft.totalHomologacoes eq 0}"
+					update=":formListar,:formSalvar,:mensagens" icon="ui-icon-trash"
+					oncomplete="if(args &amp;&amp; !args.validationFailed){ data.getPaginator().setPage(0)}">
 					<f:setPropertyActionListener target="#{softwareBean.software}"
 						value="#{soft.software}"></f:setPropertyActionListener>
 					<p:confirm header="#{msg.comum_confirmacao_cabecalho}"
 						message="#{msg.comum_confirmacao_mensagem}" icon="ui-icon-alert" />
-				</p:commandButton>				
+				</p:commandButton>
 			</p:column>
 		</p:dataTable>
-
-		<p:dialog id="dialogDetalhe" header="#{msg.software_detalhe}"
-			widgetVar="dlgDetalhe" resizable="false" showEffect="fade"
-			hideEffect="explode" modal="true" appendTo="@(body)">
-			<h:panelGrid columns="2">
-				<h:panelGrid columnClasses="label-form, campo-form" columns="2"
-					cellpadding="5" style="width:100%">
-
-					<h:outputText value="#{msg.software_marca}"></h:outputText>
-					<h:outputText value="#{softwareBean.software.marca}"
-						style="width: 300px;" />
-
-					<h:outputText value="#{msg.software_modelo}" />
-					<h:outputText value="#{softwareBean.software.modelo}"
-						style="width: 300px;" />
-
-					<h:outputText value="#{msg.software_tipo}"></h:outputText>
-					<h:outputText value="#{softwareBean.software.tipo.nome}"></h:outputText>
-
-				</h:panelGrid>
-				<h:panelGrid columnClasses="label-form, campo-form" columns="2"
-					cellpadding="5" style="vertical-align: top;">
-
-					<h:outputText value="#{msg.software_observacao}" />
-					<textarea
-						style="background-color: #F2F1F1; border: none; spellcheck: false;">#{softwareBean.software.observacao}</textarea>
-
-				</h:panelGrid>
-			</h:panelGrid>
-		</p:dialog>
 
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="explode"
 			closable="false">

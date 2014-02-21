@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<p:dialog id="dialogDetalhe" header="#{msg.software_detalhe}"
+		widgetVar="dlgDetalhe" resizable="false" showEffect="fade"
+		hideEffect="explode" modal="true" appendTo="@(body)">
+		<h:panelGrid columns="2">
+			<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+				cellpadding="5" style="width:100%">
+
+				<h:outputText value="#{msg.software_marca}"></h:outputText>
+				<h:outputText value="#{softwareBean.software.marca}"
+					style="width: 300px;" />
+
+				<h:outputText value="#{msg.software_modelo}" />
+				<h:outputText value="#{softwareBean.software.modelo}"
+					style="width: 300px;" />
+
+				<h:outputText value="#{msg.software_tipo}"></h:outputText>
+				<h:outputText value="#{softwareBean.software.tipo.nome}"></h:outputText>
+
+			</h:panelGrid>
+			<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+				cellpadding="5" style="vertical-align: top;">
+
+				<h:outputText value="#{msg.software_observacao}" />
+				<textarea
+					style="background-color: #F2F1F1; border: none; spellcheck: false;">#{softwareBean.software.observacao}</textarea>
+
+			</h:panelGrid>
+		</h:panelGrid>
+	</p:dialog>
+
+</ui:composition>
+</html>

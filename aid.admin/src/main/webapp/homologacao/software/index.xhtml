@@ -12,20 +12,21 @@
 				toggleable="false" widgetVar="pnlPrincipal">
 
 				<f:facet name="actions">
-					<h:form>
+					<h:form style="margin: 0px; padding: 0px;float: right;">
 						<p:commandButton oncomplete="pnlSalvar.show();"
 							style="float: right;" icon="ui-icon-plusthick"
 							value="Cadastrar novo software" update=":panelSalvar">
 							<f:setPropertyActionListener
 								target="#{softwareBean.novoSoftware}" value="#{true}"></f:setPropertyActionListener>
 						</p:commandButton>
-						<div style="clear: both;"></div>
 					</h:form>
 				</f:facet>
 
 				<ui:include src="/WEB-INF/includes/software/listar.xhtml" />
 
-				<ui:include src="/WEB-INF/includes/software/salvar.xhtml" />				
+				<ui:include src="/WEB-INF/includes/software/salvar.xhtml" />
+				
+				<ui:include src="/WEB-INF/includes/software/detalhar.xhtml" />
 
 				<h:form>
 					<p:remoteCommand name="updateList" update=":formListar:dataTable">

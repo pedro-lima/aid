@@ -29,8 +29,8 @@ public abstract class AbstracBusiness<T extends AbstracModel> implements
 
 	@Transaction
 	public void remover(T obj) throws CRUDException {
-		try {
-			this.getDao().remover(obj);
+		try {			
+			this.getDao().remover(this.getDao().atualizar(obj));
 		} catch (Exception ex) {
 			throw new CRUDException(ex);
 		}

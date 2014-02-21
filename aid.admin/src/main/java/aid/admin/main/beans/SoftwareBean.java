@@ -125,7 +125,7 @@ public class SoftwareBean implements Serializable {
 	// ====================================METODOS====================================
 
 	public void remover() {
-		try {
+		try {			
 			this.business.remover(software);
 			message.addInfo("Operação realizada com sucesso.", null);
 			this.software = new Software();

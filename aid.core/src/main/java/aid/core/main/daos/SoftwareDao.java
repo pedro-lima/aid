@@ -61,30 +61,37 @@ public class SoftwareDao extends AbstractDao<Software> implements
 
 	public long total(String marca, String modelo, String observacao,
 			TipoSoftware tipo) {
+		
 		JPAQuery query = new JPAQuery(this.getEm());
+		
 		QSoftware soft = QSoftware.software;
+		
 		query = query.from(soft);
 		query = filtrarPesquisa(marca, modelo, observacao, tipo, query, soft);
+		
 		return query.count();
+		
 	}
 
 	private JPAQuery filtrarPesquisa(String marca, String modelo,
 			String observacao, TipoSoftware tipo, JPAQuery query, QSoftware soft) {
-		if (marca != null && !marca.isEmpty()) {
-			query = query.where(soft.marca.like(marca));
+		
+		if (marca != null && !marca.trim().isEmpty()) {
+			query = query.where(soft.marca.like("%" + marca + "%"));
 		}
 
-		if (modelo != null && !modelo.isEmpty()) {
-			query = query.where(soft.modelo.like(modelo));
+		if (modelo != null && !modelo.trim().isEmpty()) {
+			query = query.where(soft.modelo.like("%" + modelo + "%"));
 		}
 
-		if (observacao != null) {
-			query = query.where(soft.modelo.like(observacao));
+		if (observacao != null && !observacao.trim().isEmpty()) {
+			query = query.where(soft.observacao.like("%" + observacao + "%"));
 		}
 
 		if (tipo != null) {
-			query = query.where(soft.modelo.like(modelo));
+			query = query.where(soft.tipo.eq(tipo));
 		}
+		
 		return query;
 	}
 

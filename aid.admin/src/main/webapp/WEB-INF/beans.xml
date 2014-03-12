@@ -2,6 +2,8 @@
 <beans xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://docs.jboss.org/cdi/beans_1_0.xsd">
 	<alternatives>
-		<class>aid.admin.main.datamodels.SoftwareTOLazyDataModel</class>
+		<class>br.com.aid.admin.datamodels.BeneficiadoTOLazyDataModel</class>
+		<class>br.com.aid.admin.datamodels.DoadorTOLazyDataModel</class>
+		<class>br.com.aid.admin.datamodels.SoftwareTOLazyDataModel</class>
 	</alternatives>
 </beans>

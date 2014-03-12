@@ -41,6 +41,23 @@ input {
 textarea {
 	resize: none !important;
 	overflow-y: scroll !important;
-	height: 100px;	
+	height: 100px;
 	width: 300px;
 }
+
+.ui-panel .ui-panel-title {
+	float: left;
+}
+
+table {
+	padding: 0px;
+	margin: 0px;
+}
+
+tr {
+	vertical-align: top;
+}
+
+/* .campo-form .ui-state-error { */
+/* 	border: 1px solid #68727B  !important; */
+/* } */

@@ -6,43 +6,41 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-	<div align="center">
-		<h:panelGrid columns="2">
-			<h:panelGrid columnClasses="label-form, campo-form" columns="2"
-				cellpadding="5" style="width:100%">
-				<h:outputText value="#{msg.software_marca}"></h:outputText>
-				<p:inputText value="#{softwareBean.marca}" />
+	<h:panelGrid columns="2">
+		<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+			cellpadding="5" style="width:100%">
+			<h:outputText value="#{msg.software_marca}"></h:outputText>
+			<p:inputText value="#{softwareBean.marca}" />
 
-				<h:outputText value="#{msg.software_modelo}" />
-				<p:inputText value="#{softwareBean.modelo}" />
+			<h:outputText value="#{msg.software_modelo}" />
+			<p:inputText value="#{softwareBean.modelo}" />
 
-				<h:outputText value="#{msg.software_tipo}"></h:outputText>
-				<p:selectOneMenu value="#{softwareBean.tipo}" style="width:200px">
-					<f:selectItem itemLabel="Todos" itemValue="#{null}"></f:selectItem>
-					<f:selectItems value="#{softwareBean.tipoSoftwares}" var="tipo"
-						itemValue="#{tipo}" itemLabel="#{tipo.nome}"></f:selectItems>
-				</p:selectOneMenu>
-			</h:panelGrid>
-			<h:panelGrid columnClasses="label-form, campo-form" columns="2"
-				cellpadding="5" style="vertical-align: top;">
-				<h:outputText value="#{msg.software_observacao}" />
-				<p:inputTextarea rows="10" cols="60"
-					value="#{softwareBean.observacao}"></p:inputTextarea>
-			</h:panelGrid>
+			<h:outputText value="#{msg.software_tipo}"></h:outputText>
+			<p:selectOneMenu value="#{softwareBean.tipo}" style="width:200px">
+				<f:selectItem itemLabel="Todos" itemValue="#{null}"></f:selectItem>
+				<f:selectItems value="#{softwareBean.tipoSoftwares}" var="tipo"
+					itemValue="#{tipo}" itemLabel="#{tipo.nome}"></f:selectItems>
+			</p:selectOneMenu>
 		</h:panelGrid>
+		<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+			cellpadding="5" style="vertical-align: top;">
+			<h:outputText value="#{msg.software_observacao}" />
+			<p:inputTextarea rows="10" cols="60"
+				value="#{softwareBean.observacao}"></p:inputTextarea>
+		</h:panelGrid>
+	</h:panelGrid>
 
-		<br />
+	<br />
 
-		<div>
-			<p:commandButton actionListener="#{softwareBean.pesquisar}"
-				value="Pesquisar" update="dataTable" icon="ui-icon-search"
-				oncomplete="if(args &amp;&amp; !args.validationFailed){ data.getPaginator().setPage(0)}">
-			</p:commandButton>
-			<p:commandButton actionListener="#{softwareBean.limparPesquisa}"
-				update=":formListar" value="#{msg.botao_limpar}" process="@this"
-				icon="ui-icon-refresh" styleClass="button-form">
-			</p:commandButton>
-		</div>
+	<div>
+		<p:commandButton actionListener="#{softwareBean.pesquisar}"
+			value="Pesquisar" update="dataTable" icon="ui-icon-search"
+			oncomplete="if(args &amp;&amp; !args.validationFailed){ data.getPaginator().setPage(0)}">
+		</p:commandButton>
+		<p:commandButton actionListener="#{softwareBean.limparPesquisa}"
+			update=":formListar" value="#{msg.botao_limpar}" process="@this"
+			icon="ui-icon-refresh" styleClass="button-form">
+		</p:commandButton>
 	</div>
 </ui:composition>
 </html>

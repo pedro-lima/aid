@@ -48,13 +48,6 @@
 		</dependency>
 		<!-- JUnit end -->
 
-		<!-- slf4j start -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-		<!-- slf4j end -->
-
 		<!-- QR Code start -->
 		<dependency>
 			<groupId>com.google.zxing</groupId>
@@ -93,7 +86,7 @@
 			<artifactId>aid.core</artifactId>
 			<version>1.0</version>
 		</dependency>
-		<!-- aid.core end -->
+		<!-- aid.core end -->		
 	</dependencies>
 
 	<build>

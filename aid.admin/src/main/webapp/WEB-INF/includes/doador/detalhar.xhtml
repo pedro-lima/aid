@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<p:dialog id="dialogDetalhe" header="#{msg.doador_detalhe}"
+		widgetVar="dlgDetalhe" resizable="false" showEffect="fade"
+		hideEffect="explode" modal="true" appendTo="@(body)">
+		<h:panelGrid columns="2">
+			<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+				cellpadding="5">
+
+				<h:outputText value="#{msg.doador_nome}" />
+				<h:outputText value="#{doadorBean.doador.nome}" />
+
+				<h:outputText value="#{msg.contato_telefone}"></h:outputText>
+				<h:outputText value="#{doadorBean.doador.contato.telefone}">
+					<f:converter converterId="TelefoneConverter" />
+				</h:outputText>
+
+				<h:outputText value="#{msg.contato_email}" />
+				<h:outputText value="#{doadorBean.doador.contato.email}" />
+
+				<h:outputText value="#{msg.endereco_rua}" />
+				<h:outputText value="#{doadorBean.doador.endereco.rua}" />
+
+				<h:outputText value="#{msg.endereco_bairro}" />
+				<h:outputText value="#{doadorBean.doador.endereco.bairro}" />
+				
+			</h:panelGrid>
+			<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+				cellpadding="5">
+
+				<h:outputText value="#{msg.endereco_numero}"></h:outputText>
+				<h:outputText value="#{doadorBean.doador.endereco.numero}" />
+
+				<h:outputText value="#{msg.endereco_cep}"></h:outputText>
+				<h:outputText value="#{doadorBean.doador.endereco.cep}" />
+
+				<h:outputText value="#{msg.endereco_cidade}"></h:outputText>
+				<h:outputText
+					value="#{doadorBean.doador.endereco.cidade.nome}" />
+
+				<h:outputText value="#{msg.endereco_estado}"></h:outputText>
+				<h:outputText
+					value="#{doadorBean.doador.endereco.cidade.estado.nome}" />
+					
+			</h:panelGrid>
+		</h:panelGrid>
+
+	</p:dialog>
+
+</ui:composition>
+</html>

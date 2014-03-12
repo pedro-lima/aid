@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition template="/WEB-INF/template/template.xhtml">
+		<ui:define name="content">
+			<p:messages id="mensagens" closable="true" />
+			<p:panel id="panelPrincipal" header="Listar Doador"
+				toggleable="false" widgetVar="pnlPrincipal">
+
+				<f:facet name="actions">
+					<h:form style="margin: 0px; padding: 0px;float: right;">
+						<p:commandButton oncomplete="pnlSalvar.show();"
+							style="float: right;" icon="ui-icon-plusthick"
+							value="#{msg.doador_cadastrar}" update=":formSalvar"
+							action="#{doadorBean.prepararCadastro}">
+							<f:setPropertyActionListener
+								target="#{doadorBean.codigoOperacao}" value="#{5}"></f:setPropertyActionListener>
+						</p:commandButton>
+					</h:form>
+				</f:facet>
+
+				<ui:include src="/WEB-INF/includes/doador/salvar.xhtml" />
+
+				<ui:include src="/WEB-INF/includes/doador/listar.xhtml" />
+
+				<ui:include src="/WEB-INF/includes/doador/detalhar.xhtml" />
+
+				<h:form>
+					<p:remoteCommand name="updateList" update=":formListar:dataTable">
+					</p:remoteCommand>
+				</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

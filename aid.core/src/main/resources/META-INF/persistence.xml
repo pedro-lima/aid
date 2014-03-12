@@ -5,24 +5,25 @@
 
 	<persistence-unit name="aid" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<mapping-file>/META-INF/orm.xml</mapping-file>
-		<class>aid.core.main.models.Administrador</class>
-		<class>aid.core.main.models.Aluno</class>
-		<class>aid.core.main.models.Beneficiado</class>
-		<class>aid.core.main.models.Contato</class>
-		<class>aid.core.main.models.Descarte</class>
-		<class>aid.core.main.models.Doacao</class>
-		<class>aid.core.main.models.Doador</class>
-		<class>aid.core.main.models.Endereco</class>
-		<class>aid.core.main.models.Homologacao</class>
-		<class>aid.core.main.models.ItemHomologacao</class>
-		<class>aid.core.main.models.Montagem</class>
-		<class>aid.core.main.models.Peca</class>
-		<class>aid.core.main.models.PessoaFisica</class>
-		<class>aid.core.main.models.Ponto</class>
-		<class>aid.core.main.models.Professor</class>
-		<class>aid.core.main.models.Software</class>
-		<class>aid.core.main.models.Usuario</class>
+		<class>br.com.aid.core.models.Administrador</class>
+		<class>br.com.aid.core.models.Aluno</class>
+		<class>br.com.aid.core.models.Beneficiado</class>
+		<class>br.com.aid.core.models.Cidade</class>
+		<class>br.com.aid.core.models.Contato</class>
+		<class>br.com.aid.core.models.Descarte</class>
+		<class>br.com.aid.core.models.Doacao</class>
+		<class>br.com.aid.core.models.Doador</class>
+		<class>br.com.aid.core.models.Endereco</class>
+		<class>br.com.aid.core.models.Estado</class>
+		<class>br.com.aid.core.models.Homologacao</class>
+		<class>br.com.aid.core.models.ItemHomologacao</class>
+		<class>br.com.aid.core.models.Montagem</class>
+		<class>br.com.aid.core.models.Peca</class>
+		<class>br.com.aid.core.models.PessoaFisica</class>
+		<class>br.com.aid.core.models.Ponto</class>
+		<class>br.com.aid.core.models.Professor</class>
+		<class>br.com.aid.core.models.Software</class>
+		<class>br.com.aid.core.models.Usuario</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

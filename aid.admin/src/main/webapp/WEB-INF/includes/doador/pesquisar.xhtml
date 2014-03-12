@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:panelGrid columns="2">
+		<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+			cellpadding="5" style="width:100%">
+
+			<h:outputText value="#{msg.doador_nome}" />
+			<p:inputText value="#{doadorBean.doadorPesquisa.nome}" />
+
+			<h:outputText value="#{msg.contato_email}" />
+			<p:inputText value="#{doadorBean.doadorPesquisa.email}" />
+
+		</h:panelGrid>
+		<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+			cellpadding="5" style="vertical-align: top;">
+
+			<h:outputText value="#{msg.endereco_estado}" />
+			<p:selectOneMenu value="#{doadorBean.doadorPesquisa.estado}"
+				style="width:300px;">
+				<f:selectItem itemLabel="Todos os estados" itemValue="#{null}" />
+				<f:selectItems value="#{doadorBean.estados}" var="est"
+					itemLabel="#{est.nome}" itemValue="#{est}" />
+				<p:ajax update="cidadesPesquisa"
+					listener="#{doadorBean.listarCidadesPesquisa}" />
+				<f:converter converterId="EstadoConverter" />
+			</p:selectOneMenu>
+
+			<h:outputText value="#{msg.endereco_cidade}"></h:outputText>
+			<p:selectOneMenu id="cidadesPesquisa"
+				value="#{doadorBean.doadorPesquisa.cidade}" style="width:300px;">
+				<f:selectItem itemLabel="Todas as cidades" itemValue="#{null}" />
+				<f:selectItems value="#{doadorBean.cidadesPesquisa}" var="cid"
+					itemLabel="#{cid.nome}" itemValue="#{cid}"></f:selectItems>
+				<f:converter converterId="CidadeConverter" />
+			</p:selectOneMenu>
+
+		</h:panelGrid>
+	</h:panelGrid>
+
+	<br />
+
+	<div>
+		<p:commandButton actionListener="#{doadorBean.pesquisar}"
+			value="#{msg.botao_pesquisar}" update="dataTable"
+			icon="ui-icon-search"
+			oncomplete="if(args &amp;&amp; !args.validationFailed){ data.getPaginator().setPage(0)}">
+		</p:commandButton>
+		<p:commandButton actionListener="#{doadorBean.limparPesquisa}"
+			update=":formListar" value="#{msg.botao_limpar}" process="@this"
+			icon="ui-icon-refresh" styleClass="button-form">
+			<p:resetInput target="formListar" />
+		</p:commandButton>
+	</div>
+</ui:composition>
+</html>

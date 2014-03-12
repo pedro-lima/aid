@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<p:dialog id="panelSalvar" widgetVar="pnlSalvar" closable="true"
+			modal="true" appendTo="@(body)" header="#{doadorBean.nomePanel}"
+			resizable="false" showEffect="fade" hideEffect="explode">
+			<p:ajax event="close" oncomplete="$('#btnLimpar').click();" />
+			<h:form id="formSalvar" prependId="false">
+				<div align="center">
+					<p:messages id="mensagensSalvar" closable="true" />
+					<h:panelGrid columns="2">
+						<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+							cellpadding="5">
+
+							<h:outputText value="#{msg.doador_nome}" />
+							<p:inputText value="#{doadorBean.doador.nome}" />
+
+							<h:outputText value="#{msg.contato_telefone}" />
+							<p:inputMask value="#{doadorBean.doador.contato.telefone}"
+								mask="(99) 9999-99999">
+								<f:converter converterId="TelefoneConverter"></f:converter>
+							</p:inputMask>
+
+							<h:outputText value="#{msg.contato_email}" />
+							<p:inputText value="#{doadorBean.doador.contato.email}" />
+
+							<h:outputText value="#{msg.endereco_rua}" />
+							<p:inputText value="#{doadorBean.doador.endereco.rua}" />
+
+							<h:outputText value="#{msg.endereco_bairro}" />
+							<p:inputText value="#{doadorBean.doador.endereco.bairro}" />
+
+						</h:panelGrid>
+						<h:panelGrid columnClasses="label-form, campo-form" columns="2"
+							cellpadding="5">
+
+							<h:outputText value="#{msg.endereco_numero}" />
+							<p:inputText value="#{doadorBean.doador.endereco.numero}" />
+
+							<h:outputText value="#{msg.endereco_cep}" />
+							<p:inputMask value="#{doadorBean.doador.endereco.cep}"
+								mask="99.999-999" converter="#{CepConverter.getAsObject}">
+							</p:inputMask>
+
+
+							<h:outputText value="#{msg.endereco_estado}" />
+							<p:selectOneMenu
+								value="#{doadorBean.doador.endereco.cidade.estado}"
+								style="width:300px;">
+								<f:selectItems value="#{doadorBean.estados}" var="est"
+									itemLabel="#{est.nome}" itemValue="#{est}" />
+								<p:ajax update="cidades,mensagensSalvar"
+									listener="#{doadorBean.listarCidadesCadastro}" />
+								<f:converter converterId="EstadoConverter" />
+							</p:selectOneMenu>
+
+							<h:outputText value="#{msg.endereco_cidade}"></h:outputText>
+							<p:selectOneMenu id="cidades"
+								value="#{doadorBean.doador.endereco.cidade}"
+								style="width:300px;">
+								<f:selectItems value="#{doadorBean.cidadesCadastro}" var="cid"
+									itemLabel="#{cid.nome}" itemValue="#{cid}"></f:selectItems>
+								<f:converter converterId="CidadeConverter" />
+							</p:selectOneMenu>
+
+						</h:panelGrid>
+					</h:panelGrid>
+					<br />
+					<div>
+
+						<p:commandButton actionListener="#{softwareBean.salvar}"
+							rendered="#{doadorBean.operacao.codigo==5}"
+							value="#{msg.botao_salvar}" update="formSalvar"
+							oncomplete="if(args &amp;&amp; !args.validationFailed){ updateList(); $('#mensagens').hide();}"
+							icon="ui-icon-disk">
+						</p:commandButton>
+						<p:commandButton actionListener="#{softwareBean.salvar}"
+							rendered="#{doadorBean.operacao.codigo==2}"
+							value="#{msg.botao_salvar}" update="formSalvar,:mensagens"
+							icon="ui-icon-disk"
+							oncomplete="if(args &amp;&amp; !args.validationFailed){ $('#mensagensSalvar').hide(); pnlSalvar.hide(); updateList(); } else{$('#mensagens').hide();}">
+						</p:commandButton>
+						<p:commandButton id="btnLimpar" actionListener="#{softwareBean.limpar}"
+							rendered="#{doadorBean.operacao.codigo==5}" update="formSalvar"
+							value="#{msg.botao_limpar}" process="@this"
+							icon="ui-icon-refresh" styleClass="button-form">
+							<p:resetInput target="formSalvar" />
+						</p:commandButton>
+
+					</div>
+				</div>
+			</h:form>
+		</p:dialog>
+	</ui:composition>
+</body>
+</html>

@@ -14,14 +14,6 @@
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-impl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-		</dependency>
 		<!-- JSF end -->
 
 		<!-- Weld start -->
@@ -100,6 +92,7 @@
 			<artifactId>querydsl-apt</artifactId>
 		</dependency>
 		<!-- Querydsl end -->
+		
 	</dependencies>
 
 	<build>

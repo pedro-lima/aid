@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:form id="formListar" prependId="false">
+
+		<ui:include src="/WEB-INF/includes/doador/pesquisar.xhtml" />
+
+		<br />
+
+		<p:dataTable id="dataTable" widgetVar="data" var="doa"
+			value="#{doadorBean.lista}" paginator="true" rows="10" lazy="true"
+			rowsPerPageTemplate="5,10,15,20,25,30"
+			emptyMessage="#{msg.doador_nao_existem_doadores_cadastrados}"
+			currentPageReportTemplate="{currentPage} de {totalPages}"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+			<p:column headerText="#{msg.doador_nome}" sortBy="nome">
+				<h:outputText value="#{doa.doador.nome}" />
+			</p:column>
+			<p:column headerText="#{msg.contato_telefone}" sortBy="telefone">
+				<h:outputText value="#{doa.doador.contato.telefone}">
+					<f:converter converterId="TelefoneConverter" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="#{msg.contato_email}" sortBy="email">
+				<h:outputText value="#{doa.doador.contato.email}" />
+			</p:column>
+			<p:column headerText="#{msg.endereco_cidade}" sortBy="cidade">
+				<h:outputText value="#{doa.doador.endereco.cidade.nome}" />
+			</p:column>
+			<p:column headerText="#{msg.endereco_estado}" sortBy="estado">
+				<h:outputText value="#{doa.doador.endereco.cidade.estado.nome}" />
+			</p:column>
+			<p:column style="width:15%;text-align: center;"
+				headerText="#{msg.comum_acao}">
+				<p:commandButton icon="ui-icon-zoomin"
+					oncomplete="PF('dlgDetalhe').show()" update=":dialogDetalhe">
+					<f:setPropertyActionListener target="#{doadorBean.doador}"
+						value="#{doa.doador}"></f:setPropertyActionListener>
+				</p:commandButton>
+				<p:commandButton icon="ui-icon-pencil" update=":panelSalvar"
+					oncomplete="pnlSalvar.show();"
+					action="#{doadorBean.prepararEdicaoDoador}">
+					<f:setPropertyActionListener target="#{doadorBean.codigoOperacao}"
+						value="#{2}"></f:setPropertyActionListener>
+					<f:setPropertyActionListener target="#{doadorBean.doador}"
+						value="#{doa.doador}"></f:setPropertyActionListener>
+				</p:commandButton>
+				<p:commandButton action="#{doadorBean.remover}"
+					rendered="#{doa.totalDoacoes eq 0}"
+					update=":formListar,:formSalvar,:mensagens" icon="ui-icon-trash"
+					oncomplete="if(args &amp;&amp; !args.validationFailed){ data.getPaginator().setPage(0)}">
+					<f:setPropertyActionListener target="#{doadorBean.doador}"
+						value="#{doa.doador}"></f:setPropertyActionListener>
+					<p:confirm header="#{msg.comum_confirmacao_cabecalho}"
+						message="#{msg.comum_confirmacao_mensagem}" icon="ui-icon-alert" />
+				</p:commandButton>
+
+			</p:column>
+		</p:dataTable>
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="explode"
+			closable="false">
+			<p:commandButton value="#{msg.comum_sim}" type="button"
+				styleClass="ui-confirmdialog-yes" icon="ui-icon-check">
+			</p:commandButton>
+			<p:commandButton value="#{msg.comum_nao}" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		</p:confirmDialog>
+	</h:form>
+</ui:composition>
+</html>
